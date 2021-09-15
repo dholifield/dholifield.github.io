@@ -8,18 +8,14 @@
   src: url(fonts/ISOCT.ttf);
 }
 
-.container {
-  height: 90vh;
-  position: relative;
+@font-face {
+  font-family: robo;
+  src: url(fonts/RobotoMono.ttf);
 }
 
-.vert-center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+body {
+  color: white;
+  background-color: #282C34;
 }
 
 h1 {
@@ -35,8 +31,41 @@ h2 {
   font-family: iso;
   font-size: 24px;
   color: grey;
-  line-height: 15px;
+  line-height: 25px;
+  margin-bottom: 0;
+  margin-top: 15px;
   text-align: left;
+}
+
+h3 {
+  font-family: iso;
+  font-size: 24px;
+  color: white;
+  line-height: 25px;
+  margin-bottom: 0;
+  margin-top: 15px;
+  text-align: left;
+}
+
+p {
+  font-family: robo;
+  color: grey;
+  font-size: 20px;
+  text-align: justify;
+}
+
+.container {
+  height: 90vh;
+  position: relative;
+}
+
+.vert-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .menu {
@@ -55,8 +84,8 @@ h2 {
 .dropdown {
   display: none;
   position: absolute;
-  background-color: transparent;
-  min-width: 160px;
+  padding-top: 15px;
+  min-width: 150px;
   z-index: 1;
 }
 
@@ -64,7 +93,7 @@ h2 {
   font-family: isoc;
   font-size: 20px;
   color: grey;
-  padding: 12px 0px;
+  padding: 0 0 20px 10px;
   text-decoration: none;
   display: block;
 }
@@ -76,7 +105,15 @@ h2 {
 .menu:hover .dropdown {
   display: block;
 }
-/*
-.menu:hover .drop-btn {
-  background: #ddd;
+
+.meat {
+  margin: 100px 10vw;
+}
+
+.meat p {
+  padding-bottom: 50px;
+}
+
+.meat h2 {
+  color: white;
 }
