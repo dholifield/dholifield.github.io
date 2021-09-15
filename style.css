@@ -1,10 +1,15 @@
 @font-face {
-  src: url(fonts/ISOCT.ttf);
+  font-family: isoc;
+  src: url(fonts/ISOCTEUR.ttf);
+}
+
+@font-face {
   font-family: iso;
+  src: url(fonts/ISOCT.ttf);
 }
 
 .container {
-  height: 95vh;
+  height: 90vh;
   position: relative;
 }
 
@@ -17,18 +22,61 @@
   transform: translate(-50%, -50%);
 }
 
-.title {
+h1 {
+  font-family: iso;
   font-size: 50px;
   color: white;
-  line-height: 20px;
-  font-family: iso;
+  line-height: 50px;
+  margin-bottom: 15px;
   text-align: center;
 }
 
-.title2 {
-  font-size: 15px;
+h2 {
+  font-family: iso;
+  font-size: 24px;
   color: grey;
   line-height: 15px;
-  font-family: iso;
   text-align: left;
+}
+
+.menu {
+  position: relative;
+  display: inline-block;
+}
+
+.drop-btn {
+  right: 0;
+  background-color: transparent;
+  padding: 12px 0px 0px 12px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  background-color: transparent;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.dropdown a {
+  font-family: isoc;
+  font-size: 20px;
+  color: grey;
+  padding: 12px 0px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  color: white;
+}
+
+.menu:hover .dropdown {
+  display: block;
+}
+/*
+.menu:hover .drop-btn {
+  background: #ddd;
 }
