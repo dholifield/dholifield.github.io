@@ -199,12 +199,13 @@ button[type="submit"]:hover {
 }
 
 .center {
-  display: block;
+  display: inline-block;
   margin-left: auto;
   margin-right: auto;
-  max-width: 500px;
-  border-radius: 10px;
-  width: 50%;
+}
+
+#images {
+  text-align: center;
 }
 
 .skills {
