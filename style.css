@@ -16,6 +16,7 @@
 body {
   color: white;
   background-color: #282C34;
+  margin: 0;
 }
 
 h1 {
@@ -37,11 +38,70 @@ h2 {
   text-align: left;
 }
 
+h3 {
+  font-family: isoc;
+  font-size: 20px;
+  color: grey;
+  margin: 10px 0 0 0;
+  letter-spacing: -2px;
+}
+
 p {
   font-family: robo;
   color: grey;
   font-size: 20px;
   text-align: justify;
+  margin: 10px 0 20px 0;
+}
+
+form {
+  font-family: robo;
+  color: grey;
+  font-size: 20px;
+}
+
+input {
+  font-family: robo;
+  color: black;
+  font-size: 16px;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+  padding: 2px;
+}
+
+textarea {
+  margin-top: 5px;
+  font-family: robo;
+  color: black;
+  font-size: 16px;
+  resize: vertical;
+  width: 100%;
+  border-radius: 2px;
+  border: none;
+  outline: none;
+}
+
+button[type="submit"] {
+  font-family: robo;
+  font-size: 20px;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 2px;
+  background-color: #B871CE;
+  color: black;
+}
+
+button[type="submit"]:hover {
+  background-color: #C17DD8;
+}
+
+.form-group {
+  width: 500px;
 }
 
 .container {
@@ -58,8 +118,22 @@ p {
 }
 
 .menu {
-  position: relative;
-  display: inline-block;
+  padding: 10px 10px;
+  background-color: #191B21;
+}
+
+.menu a {
+  font-family: isoc;
+  letter-spacing: -3px;
+  word-spacing: -5px;
+  font-size: 20px;
+  color: grey;
+  padding: 0 12px 0 0;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: #E06C75;
 }
 
 .drop-btn {
@@ -87,26 +161,53 @@ p {
   display: block;
 }
 
-.dropdown a:hover {
-  color: white;
-}
-
-.menu:hover .dropdown {
-  display: block;
-}
-
 .meat {
-  margin: 100px 10vw;
+  margin: 50px 10vw;
+}
+
+.meat h1 {
+  margin: 50px;
 }
 
 .meat p {
-  padding-bottom: 50px;
+  color: #81868C;
 }
 
 .meat h2 {
-  color: white;
+  color: #59BBC6;
+  margin-top: 50px;
+}
+
+.meat h3 {
+  color: #95BF77;
 }
 
 .meat p a {
-  color: lightgrey;
+  color: #ccc;
+  text-decoration: none;
+}
+
+.meat p a:hover {
+  color: white;
+}
+
+.meat img {
+  max-width: 700px;
+  max-height: 550px;
+  padding: 10px;
+  border-radius: 18px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 500px;
+  border-radius: 10px;
+  width: 50%;
+}
+
+.skills {
+  padding-left: 50px;
+  text-indent: -50px; 
 }

@@ -9,26 +9,32 @@
   <body>
     <header>
       <div class="menu">
-        <button class="drop-btn">
-          <svg
-            fill="#ffffff"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 50 50"
-            width="24px"
-            height="24px">
-            <path d="M 0 9 L 0 11 L 50 11 L 50 9 Z M 0 24 L 0 26 L 50 26 L 50 24 Z M 0 39 L 0 41 L 50 41 L 50 39 Z"/>
-          </svg>
-        </button>
-        <div class="dropdown">
-          <a href="index.html">Home</a>
-          <a href="about.html">About Me</a>
-          <a href="projects.html">Projects</a>
-          <a href="contact.html">Contact</a>
-        </div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Me</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
       </div>
     </header>
     <main>
       <h1>Contact</h1>
+      <div class="container" style="height:70vh;">
+        <div class="vert-center">
+          <div class="form-group">
+            <form action="https://formspree.io/f/moqyrddl"
+            method="POST"
+            enctype="multipart/form-data"
+            name="EmailForm">
+              Name:<br>
+              <input type="text" name="Contact-Name"><br><br>
+              Email:<br>
+              <input type="email" name="Contact-Email"><br><br>
+              Message:<br>
+              <textarea name="Contact-Message" rows="6"></textarea><br><br>
+              <button type="submit" value="Submit">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
 
