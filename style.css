@@ -12,13 +12,13 @@
   font-family: robo;
   src: url(fonts/RobotoMono.ttf);
 }
-
+/*
 @media only screen and (max-width:700px) {
   h1 { font-size: 30px; }
   .menu a { font-size: 15px; }
   .meat img { max-width: 300px; }
 }
-
+*/
 body {
   color: white;
   background-color: #282C34;
@@ -217,4 +217,12 @@ button[type="submit"]:hover {
 .skills {
   padding-left: 50px;
   text-indent: -50px;
+}
+
+.links {
+  text-align: center;
+}
+
+.links a {
+  padding: 0 5vw;
 }
