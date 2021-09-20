@@ -23,6 +23,7 @@ body {
   color: white;
   background-color: #282C34;
   margin: 0;
+  min-width: 500px;
 }
 
 h1 {
