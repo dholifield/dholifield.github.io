@@ -1,6 +1,6 @@
 @font-face {
   font-family: isoc;
-  src: url(fonts/ISOCTEUR.ttf);
+  src: url(fonts/RobotoMono.ttf);
 }
 
 @font-face {
@@ -56,7 +56,6 @@ h3 {
   font-size: 20px;
   color: grey;
   margin: 10px 0 0 0;
-  letter-spacing: -2px;
 }
 
 p {
@@ -170,6 +169,7 @@ img {
   padding: 10px;
   margin-bottom: 10px;
   background-color: #191B21;
+  word-spacing: -7px;
 }
 
 .meat .menu {
@@ -178,11 +178,9 @@ img {
 
 .menu a {
   font-family: isoc;
-  letter-spacing: -3px;
-  word-spacing: -5px;
   font-size: 25px;
   color: grey;
-  padding: 0 12px 0 0;
+  padding: 0 20px 0 0;
   text-decoration: none;
 }
 
@@ -224,7 +222,7 @@ img {
 }
 
 .meat p {
-  color: #81868C;
+  color: #a4aab2;
 }
 
 .meat h2 {
@@ -237,12 +235,12 @@ img {
 }
 
 .meat p a {
-  color: #ccc;
+  color: white;
   text-decoration: none;
 }
 
 .meat p a:hover {
-  color: white;
+  color: #C17DD8;
 }
 
 .img-text {
