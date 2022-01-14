@@ -120,12 +120,41 @@ button[type="submit"]:hover {
   background-color: #C17DD8;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%
+}
+
+footer p {
+  font-size: 15px;
+  margin: 20px;
+  text-align: right;
+}
+
+footer a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: white;
+}
+
+img {
+  max-height: 500px;
+  max-width: 80%;
+  padding: 5px;
+  border-radius: 10px;
+  min-width: 100px;
+}
+
 .form-group {
   width: 400px;
 }
 
 .container {
-  height: 90vh;
+  height: calc(90vh - 50px);
   position: relative;
 }
 
@@ -138,8 +167,13 @@ button[type="submit"]:hover {
 }
 
 .menu {
-  padding: 10px 10px;
+  padding: 10px;
+  margin-bottom: 10px;
   background-color: #191B21;
+}
+
+.meat .menu {
+  border-radius: 10px;
 }
 
 .menu a {
@@ -211,12 +245,19 @@ button[type="submit"]:hover {
   color: white;
 }
 
-.meat img {
-  width: 400px;
-  max-width: 80%;
-  padding: 10px;
+.img-text {
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  background-color: #191B21;
   border-radius: 18px;
-  min-width: 100px;
+}
+
+.caption {
+  font-family: robo;
+  color: white;
+  display: block;
+  padding: 20px;
 }
 
 .center {
