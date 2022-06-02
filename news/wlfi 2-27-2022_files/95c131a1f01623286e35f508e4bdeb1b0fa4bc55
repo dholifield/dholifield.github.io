@@ -1,0 +1,113 @@
+	var field59 = field59 || {};
+(function(w,d){
+	field59.lp = "https://";
+		if(!field59.parameters) { field59.parameters = {}; }
+    
+
+
+	if(!field59.cssloaded) {
+		var c = d.createElement('link'); c.type = 'text/css'; c.rel='stylesheet'; c.href = "https://player.field59.com/release-3.20.1/css/main-c335bac439.css"; d.getElementsByTagName('head')[0].appendChild(c);
+		field59.cssloaded = true;
+	}
+
+
+	var playerobj = {
+		id: "95c131a1f01623286e35f508e4bdeb1b0fa4bc55",
+		intitalized: false,
+		loaded: false,
+			init: function() {
+			if(this.intitalized && this.loaded) return true;
+			this.intitalized = true;
+					this.loaded = f59.renderPlayer(this.id, this.config);
+							},
+
+
+		config: {
+		"pm": "video",
+		"mt": "s",
+		"k6":'$398146622120534,$231816912879463,$451982825111605,$312972917388391,$323017017946427,$321409917857141,$718351339910711,$322213517901784,$255119114174106,$415020623058034,$329847018325891,$323017017946427,$331454018415177,$321008217834820,$419038223281248,$327436418191963,$320606417812498,$328641718258927,$325829318102677,$329847018325891,$332257518459820,$329043418281248,$420243523348212,$335069918616070,$325829318102677,$304535916919641',
+"ao":true,
+"brand": "field59",
+"sharing": "//player.field59.com/v4/vps/WLFI/95c131a1f01623286e35f508e4bdeb1b0fa4bc55",
+"ga": [ "UA-54612925-17", "UA-54189600-52", "UA-54189600-42"],
+"comscore": false,
+"autoplay": false,
+"polite": false,
+"visible": false,
+"showtitle": false,
+		"hasCaptions":true,
+		"thumb" : "https://cdn.field59.com/WLFI/89c3f445b9c4243b8aae71ed9ce84caab689a402.jpg",
+						"baseurl" : "//player.field59.com/v4",
+				"dfpConfig":{"companions":"f59-cb-95c131a1f01623286e35f508e4bdeb1b0fa4bc55", "prerollTemplate":"https://pubads.g.doubleclick.net/gampad/ads?iu=/132916964,22591738783/wlfi.com/video&description_url=http%3A%2F%2Fwlfi.com&vpos=preroll&env=vp&impl=s&correlator=&tfcd=0&npa=0&gdfp_req=1&output=vast&sz=640x480&ciu_szs=300x250&cust_params=category%3D{categories}%26keyword%3D{keywords}&unviewed_position_start=1","midrollTemplate" :"","postrollTemplate" :"","prerollCompanionTemplate" :"","midrollCompanionTemplate" :"","postrollCompanionTemplate" :"", "polite": "false"},
+		"clip": {
+		          	"url": "https://vod.field59.com/vod/_definst_/smil:bimvid-storage/WLFI/1646021886-95c131a1f01623286e35f508e4bdeb1b0fa4bc55.smil/manifest.f4m",
+			"m3u8": "https://vod.field59.com/vod/_definst_/smil:bimvid-storage/WLFI/1646021886-95c131a1f01623286e35f508e4bdeb1b0fa4bc55.smil/playlist.m3u8",
+            "urlResolvers": ['f4m', 'bwcheck'],
+            "provider": "httpstreaming",
+            "bufferLength": 6,
+            "adaptive": true,
+        			"scaling":"fit",
+			"pageUrl": escape(document.URL),"id":"621c4c34c239896611354613",
+						"ccsidecar" : "https://cdn.field59.com/WLFI/1646021766-95c131a1f01623286e35f508e4bdeb1b0fa4bc55_cc.vtt",			"owner": "WLFI",
+			"dockey":"95c131a1f01623286e35f508e4bdeb1b0fa4bc55",
+			"title": "Purdue SIGBots take on the world",
+			"description": "Purdue University's competitive robotics team, Purdue SIGBots, swept their last tournament; and now they're ready to take on the world.",
+			"duration":108.667,
+			"keywords": "",
+			"categories" : "news"
+			
+		},
+		"plugins": {
+			"controls": 	{"url":"https://swfs.field59.com/f59-controls-3.2.16.swf", "time": true}
+			,"dfp": { "zIndex":50, "onCompanion": function(oC){$('#'+oC.containerId).html(oC.content);}}
+		}
+	},
+	};
+	field59.players = field59.players || [];
+	field59.players.push(playerobj);
+	
+		
+					url = "https://player.field59.com/release-3.20.1/js/html5_dfp-324a559b1f.js";
+			function rtg() {
+		field59.sl = true;
+		var i,p=field59.players;
+		for(i=0; i < p.length; i++) { obj=p[i]; if(!obj.intitalized){ obj.init(); } }
+		//f59.finalizeListeners();
+	}
+	function loadit() {
+		if (typeof ga == 'undefined') { var gas = d.createElement('script'); gas.type = 'text/javascript'; gas.src = "//www.google-analytics.com/analytics.js"; d.getElementsByTagName('head')[0].appendChild(gas); }
+		if (typeof w.field59.sl === "undefined") {
+			var s = d.createElement('script'); s.type = 'text/javascript'; s.src = url; if (s.readyState) { s.onreadystatechange = function (){ if (this.readyState == 'complete' || this.readyState == 'loaded') { rtg(); } }; } else { s.onload = rtg; } d.getElementsByTagName('head')[0].appendChild(s);
+		} else { rtg(); }
+	}
+
+	if (d.readyState != 'loading') {
+		loadit();
+	} else if (d.addEventListener) {
+		d.addEventListener("DOMContentLoaded", loadit);
+	} else {
+		d.attachEvent('onreadystatechange', function() {
+			if (d.readyState != 'loading') {
+				loadit();
+			}
+		});
+	}
+
+		var el = d.createElement("div");
+	el.setAttribute("class", "f59-video");
+	el.innerHTML = '<div id="f59-95c131a1f01623286e35f508e4bdeb1b0fa4bc55" class="f59-main"></div><div id="f59-cb-95c131a1f01623286e35f508e4bdeb1b0fa4bc55" class="f59-companion" style="display:none"></div>';
+		var ipo, ors = {}; 
+	field59.ipo && ((ipo = field59.ipo || {}), (ors = ipo["95c131a1f01623286e35f508e4bdeb1b0fa4bc55"] || ipo.global || {}));
+	if (typeof ors.targetdiv !== 'undefined' ) {
+		var t = d.getElementById(ors.targetdiv);
+		t.appendChild(el);
+	} else {
+		var scriptEls = d.getElementsByTagName("script"); var i; var len = scriptEls.length;
+		for (i = 0; i < len; i++) {
+			if (scriptEls[i].getAttribute("src") && scriptEls[i].getAttribute("src").indexOf("95c131a1f01623286e35f508e4bdeb1b0fa4bc55") > -1) {
+				var t = scriptEls[i]; t.parentNode.insertBefore(el, t.nextSibling);
+			}
+		}
+	}
+			if (typeof w.field59.sl !== "undefined") { playerobj.init(); }
+})(window, document);

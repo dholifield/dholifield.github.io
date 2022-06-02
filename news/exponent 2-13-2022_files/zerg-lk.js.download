@@ -1,0 +1,10 @@
+(function() {
+	var node = document.getElementById("zergnet-widget-loader");
+	node.id = "zergnet-widget-72671";
+	node.className += " zergnet-widget-72671";
+
+	var zergnet = document.createElement('script');
+	zergnet.type = 'text/javascript'; zergnet.async = true;
+	zergnet.src = "https://www.zergnet.com/zerg.js?id=72671";
+	document.getElementsByTagName('head')[0].appendChild(zergnet);
+})();

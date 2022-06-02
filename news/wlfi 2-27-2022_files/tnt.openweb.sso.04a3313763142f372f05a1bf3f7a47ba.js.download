@@ -1,0 +1,74 @@
+if (window.SPOTIM && window.SPOTIM.startSSO) {
+    startSSO();
+} else {
+    document.addEventListener('spot-im-api-ready', startSSO);
+}
+function openWebSSOLogout() {
+    if(window.SPOTIM && window.SPOTIM.logout) {
+        try { window.SPOTIM.logout();
+        } catch(err) {
+            console.log(err.message);
+        }
+    }
+}
+
+function startSSO() {
+    if(!TNCMS.User.isLoggedIn()) {
+        openWebSSOLogout();
+        for (var x in Object.keys(sessionStorage)) {
+            var key = Object.keys(sessionStorage)[x];
+            if (key && key.toString() && key.toString().indexOf('TNCMSUUID') > -1) {
+                sessionStorage.removeItem(Object.keys(sessionStorage)[x]);
+            }
+        }
+        return false;
+    }
+
+    let callback = function (codeA, completeSSOCallback) {
+        // call your backend to receive codeB and return it
+        // to OpenWeb via completeSSOCallback function
+        var el = document.querySelector('.openweb-comments');
+        var registerUrl = el.dataset.url;
+        oURLEncoded = new URLSearchParams();
+        oURLEncoded.append("code_a", codeA);
+        fetch(registerUrl, {
+            method: 'POST',
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: oURLEncoded
+        }).then(function(res) { return res.json(); }).then(function(oResult) {
+            if (oResult && oResult.success) {
+                completeSSOCallback(oResult.data.codeB)
+            } else {
+                throw "Register failed: " + (oResult.error ? oResult.error : JSON.stringify(oResult))
+            }
+        });
+    };
+     
+    if (TNCMS.User.isLoggedIn()) {
+        var uuid = sessionStorage.getItem("TNCMSUUID:" + TNCMS.User.getScreenName().replace(/\s+/g, ''))
+
+        if (uuid && uuid.length) {
+            window.SPOTIM.startSSO({callback: callback, userId: uuid }).catch(function (reason) {
+                console.log('SSO failed: ' + reason);
+            });
+        } else {
+            var url = window.location.origin + "/tncms/openweb/sso/user/retrieve";
+            fetch(url)
+                .then(function (response) { 
+                    return response.json();
+                })
+                .then(function (response) {
+                    var uuid = '';
+                    if (response.success) {
+                        uuid = response.data.user.primary_key;
+                        sessionStorage.setItem("TNCMSUUID:" + TNCMS.User.getScreenName().replace(/\s+/g, ''), uuid)
+                    } else {
+                        uuid = null;
+                    }
+                    window.SPOTIM.startSSO({callback: callback, userId: uuid }).catch(function (reason) {
+                        console.log('SSO failed: ' + reason);
+                    });
+                });
+        }
+    }
+ }

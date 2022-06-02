@@ -1,0 +1,583 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 	};
+/******/
+/******/
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		0: 0
+/******/ 	};
+/******/
+/******/
+/******/
+/******/ 	// script path function
+/******/ 	function jsonpScriptSrc(chunkId) {
+/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".bundle.js"
+/******/ 	}
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/ 	// This file contains only the entry chunk.
+/******/ 	// The chunk loading function for additional chunks
+/******/ 	__webpack_require__.e = function requireEnsure(chunkId) {
+/******/ 		var promises = [];
+/******/
+/******/
+/******/ 		// JSONP chunk loading for javascript
+/******/
+/******/ 		var installedChunkData = installedChunks[chunkId];
+/******/ 		if(installedChunkData !== 0) { // 0 means "already installed".
+/******/
+/******/ 			// a Promise means "currently loading".
+/******/ 			if(installedChunkData) {
+/******/ 				promises.push(installedChunkData[2]);
+/******/ 			} else {
+/******/ 				// setup Promise in chunk cache
+/******/ 				var promise = new Promise(function(resolve, reject) {
+/******/ 					installedChunkData = installedChunks[chunkId] = [resolve, reject];
+/******/ 				});
+/******/ 				promises.push(installedChunkData[2] = promise);
+/******/
+/******/ 				// start chunk loading
+/******/ 				var script = document.createElement('script');
+/******/ 				var onScriptComplete;
+/******/
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.src = jsonpScriptSrc(chunkId);
+/******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				onScriptComplete = function (event) {
+/******/ 					// avoid mem leaks in IE.
+/******/ 					script.onerror = script.onload = null;
+/******/ 					clearTimeout(timeout);
+/******/ 					var chunk = installedChunks[chunkId];
+/******/ 					if(chunk !== 0) {
+/******/ 						if(chunk) {
+/******/ 							var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 							var realSrc = event && event.target && event.target.src;
+/******/ 							error.message = 'Loading chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 							error.name = 'ChunkLoadError';
+/******/ 							error.type = errorType;
+/******/ 							error.request = realSrc;
+/******/ 							chunk[1](error);
+/******/ 						}
+/******/ 						installedChunks[chunkId] = undefined;
+/******/ 					}
+/******/ 				};
+/******/ 				var timeout = setTimeout(function(){
+/******/ 					onScriptComplete({ type: 'timeout', target: script });
+/******/ 				}, 120000);
+/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				document.head.appendChild(script);
+/******/ 			}
+/******/ 		}
+/******/ 		return Promise.all(promises);
+/******/ 	};
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "https://static-cdn.spot.im/production/conversation-survey/tags/v0.5.0/";
+/******/
+/******/ 	// on error function for async loading
+/******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
+/******/
+/******/ 	var jsonpArray = window["webpackJsonp_spotim_survey"] = window["webpackJsonp_spotim_survey"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.ts");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__("./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+
+var iterableToArrayLimit = __webpack_require__("./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+
+var unsupportedIterableToArray = __webpack_require__("./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableRest = __webpack_require__("./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__("./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+
+/***/ }),
+
+/***/ "./src/index.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
+var slicedToArray = __webpack_require__("./node_modules/@babel/runtime/helpers/slicedToArray.js");
+var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__("./node_modules/@babel/runtime/helpers/defineProperty.js");
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// EXTERNAL MODULE: ./src/services/viewFilterService.ts
+var viewFilterService = __webpack_require__("./src/services/viewFilterService.ts");
+
+// EXTERNAL MODULE: external "window.__SPOTIM__.SERVICES.configProvider"
+var external_window_SPOTIM_SERVICES_configProvider_ = __webpack_require__("@spotim/config-provider");
+var external_window_SPOTIM_SERVICES_configProvider_default = /*#__PURE__*/__webpack_require__.n(external_window_SPOTIM_SERVICES_configProvider_);
+
+// CONCATENATED MODULE: ./src/services/raffleService.ts
+
+
+var createRaffleObject = function createRaffleObject(config) {
+  var maximumPossibleNum = Object.values(config).reduce(function (a, b) {
+    return a + b;
+  });
+  var testObjects = [];
+  var counter = 0;
+  Object.keys(config).map(function (questionId) {
+    var tempTestObject = {
+      min: counter,
+      max: counter + config[questionId],
+      questionId: questionId
+    };
+    counter = counter + config[questionId];
+    testObjects.push(tempTestObject);
+  });
+  return {
+    testObjects: testObjects,
+    maximumPossibleNum: maximumPossibleNum
+  };
+};
+
+var pickQuestion = function pickQuestion(questions, pickedNum) {
+  var selectedQuestion = null;
+  questions.forEach(function (q) {
+    if (pickedNum > q.min && pickedNum < q.max) {
+      selectedQuestion = q.questionId;
+    }
+  });
+  return selectedQuestion;
+};
+
+var raffleService_getQuestionConfiguration = function getQuestionConfiguration() {
+  var viewabilityPercentage = external_window_SPOTIM_SERVICES_configProvider_default.a.get("tenant_config.conversation-survey.viewability_percentage", {
+    q1: 100
+  });
+  return viewabilityPercentage;
+};
+
+var raffleQuestion = function raffleQuestion() {
+  var viewabilityPercentageConfig = raffleService_getQuestionConfiguration();
+  var raffleObject = createRaffleObject(viewabilityPercentageConfig);
+  var randomNum = Math.floor(Math.random() * (raffleObject.maximumPossibleNum + 1));
+  return pickQuestion(raffleObject.testObjects, randomNum);
+};
+// CONCATENATED MODULE: ./src/index.ts
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+function initConversationSurvey() {
+  var _window$__SPOTIM__;
+
+  if (!window.__SPOTIM__) {
+    window.__SPOTIM__ = {};
+  }
+
+  window.__SPOTIM__ = _objectSpread(_objectSpread({}, (_window$__SPOTIM__ = window.__SPOTIM__) !== null && _window$__SPOTIM__ !== void 0 ? _window$__SPOTIM__ : {}), {}, {
+    renderSurvey: function renderSurvey(config) {
+      return lazyBoot(config);
+    },
+    initConversationSurvey: function initConversationSurvey(_, config) {
+      return lazyBoot(config);
+    }
+  });
+}
+
+function initDeferredConversationSurveys() {
+  if (window.__SPOTIM__.deferredConversationSurveys) {
+    var _window$__SPOTIM__$de, _window, _window$__SPOTIM__2, _window$__SPOTIM__2$d, _window2, _window2$__SPOTIM__, _window2$__SPOTIM__$d;
+
+    // Take latest deferred ConversationSurvey
+    var _ref = (_window$__SPOTIM__$de = (_window = window) === null || _window === void 0 ? void 0 : (_window$__SPOTIM__2 = _window.__SPOTIM__) === null || _window$__SPOTIM__2 === void 0 ? void 0 : (_window$__SPOTIM__2$d = _window$__SPOTIM__2.deferredConversationSurveys) === null || _window$__SPOTIM__2$d === void 0 ? void 0 : _window$__SPOTIM__2$d.slice(-1)) !== null && _window$__SPOTIM__$de !== void 0 ? _window$__SPOTIM__$de : [{}],
+        _ref2 = slicedToArray_default()(_ref, 1),
+        deferredItem = _ref2[0];
+
+    if (((_window2 = window) === null || _window2 === void 0 ? void 0 : (_window2$__SPOTIM__ = _window2.__SPOTIM__) === null || _window2$__SPOTIM__ === void 0 ? void 0 : (_window2$__SPOTIM__$d = _window2$__SPOTIM__.deferredConversationSurveys) === null || _window2$__SPOTIM__$d === void 0 ? void 0 : _window2$__SPOTIM__$d.length) > 0) {
+      window.__SPOTIM__.deferredConversationSurveys = undefined;
+    }
+
+    lazyBoot(deferredItem === null || deferredItem === void 0 ? void 0 : deferredItem.options);
+  }
+}
+
+function lazyBoot(_ref3) {
+  var element = _ref3.element,
+      postId = _ref3.postId;
+  var shouldRenderByViewFilter = Object(viewFilterService["a" /* checkViewFilter */])();
+  var selectedQuestion = raffleQuestion();
+
+  if (shouldRenderByViewFilter && selectedQuestion && selectedQuestion !== 'none') {
+    var config = {
+      element: element,
+      postId: postId,
+      questionId: selectedQuestion
+    };
+    Promise.all(/* import() */[__webpack_require__.e(2), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, "./src/boot.tsx")).then(function (boot) {
+      boot["default"](config);
+    });
+  }
+}
+
+(function () {
+  initConversationSurvey();
+  initDeferredConversationSurveys();
+})();
+
+/***/ }),
+
+/***/ "./src/services/viewFilterService.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return setViewFilter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return checkViewFilter; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _spotim_config_provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("@spotim/config-provider");
+/* harmony import */ var _spotim_config_provider__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_spotim_config_provider__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+var CONVERSATION_SURVEY = "SPOTIM_CONVERSATION_SURVEY";
+
+var getCurrentConvId = function getCurrentConvId() {
+  var spotId = _spotim_config_provider__WEBPACK_IMPORTED_MODULE_1___default.a.get("spotId");
+  var postId = _spotim_config_provider__WEBPACK_IMPORTED_MODULE_1___default.a.get("postId");
+  return "".concat(spotId, "_").concat(postId);
+};
+
+var getTTLForAction = function getTTLForAction(actionType) {
+  if (actionType == "click") {
+    var click_ttl = _spotim_config_provider__WEBPACK_IMPORTED_MODULE_1___default.a.get("tenant_config.conversation-survey.click_ttl", 7);
+    return click_ttl;
+  }
+
+  if (actionType === "exit") {
+    var exit_ttl = _spotim_config_provider__WEBPACK_IMPORTED_MODULE_1___default.a.get("tenant_config.conversation-survey.exit_ttl", 7);
+    return exit_ttl;
+  }
+};
+
+var setModifiedOrRemove = function setModifiedOrRemove(filteredConverations) {
+  if (Object.entries(filteredConverations).length > 0) {
+    localStorage.setItem(CONVERSATION_SURVEY, JSON.stringify(filteredConverations));
+  } else {
+    localStorage.setItem(CONVERSATION_SURVEY, "");
+  }
+};
+
+var setViewFilter = function setViewFilter(actionType) {
+  var currentConversationId = getCurrentConvId();
+  var TTLForAction = getTTLForAction(actionType);
+
+  var itemToAdd = _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({}, currentConversationId, new Date(Date.now() + TTLForAction * 24 * 60 * 60 * 1000).getTime());
+
+  var filteredConverations = localStorage.getItem(CONVERSATION_SURVEY);
+  filteredConverations = _objectSpread(_objectSpread({}, filteredConverations && JSON.parse(filteredConverations)), itemToAdd);
+  localStorage.setItem(CONVERSATION_SURVEY, JSON.stringify(filteredConverations));
+};
+var checkViewFilter = function checkViewFilter() {
+  var currentConversationId = getCurrentConvId();
+  var filteredConverations = localStorage.getItem(CONVERSATION_SURVEY);
+
+  if (!filteredConverations) {
+    return true;
+  }
+
+  filteredConverations = JSON.parse(filteredConverations);
+  var shouldRender = false;
+  Object.keys(filteredConverations).forEach(function (convId) {
+    if (convId === currentConversationId) {
+      if (filteredConverations[convId] < new Date().getTime()) {
+        delete filteredConverations[currentConversationId];
+        setModifiedOrRemove(filteredConverations);
+        shouldRender = true;
+      }
+    }
+  });
+  return shouldRender;
+};
+
+/***/ }),
+
+/***/ "@spotim/config-provider":
+/***/ (function(module, exports) {
+
+module.exports = window.__SPOTIM__.SERVICES.configProvider;
+
+/***/ }),
+
+/***/ "classnames":
+/***/ (function(module, exports) {
+
+module.exports = window.__SPOTIM__.lib.classnames;
+
+/***/ }),
+
+/***/ "react":
+/***/ (function(module, exports) {
+
+module.exports = window.__SPOTIM__.lib.react;
+
+/***/ }),
+
+/***/ "react-dom":
+/***/ (function(module, exports) {
+
+module.exports = window.__SPOTIM__.lib.ReactDom;
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=conversation-survey.js.map

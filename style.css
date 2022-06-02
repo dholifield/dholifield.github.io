@@ -51,6 +51,16 @@ h2 {
   text-align: left;
 }
 
+h2 a {
+  font-family: iso;
+  font-size: 24px;
+  color: grey;
+  line-height: 25px;
+  margin-bottom: 0;
+  margin-top: 15px;
+  text-align: left;
+}
+
 h3 {
   font-family: isoc;
   font-size: 20px;
@@ -230,8 +240,24 @@ img {
   margin-top: 50px;
 }
 
+.meat h2 a {
+  color: #59BBC6;
+  margin-top: 50px;
+  text-decoration: none;
+}
+
+.meat h2 a:hover {
+  color: #BFEAEF;
+  margin-top: 50px;
+  text-decoration: none;
+}
+
 .meat h3 {
   color: #95BF77;
+}
+
+.meat p b {
+  color: #bbb;
 }
 
 .meat p a {
@@ -241,6 +267,16 @@ img {
 
 .meat p a:hover {
   color: #C17DD8;
+}
+
+.meat a {
+  font-family: robo;
+  color: #a4aab2;
+  text-decoration: none;
+}
+
+.meat a:hover {
+  color: white;
 }
 
 .img-text {
