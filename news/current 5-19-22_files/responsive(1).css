@@ -1,0 +1,121 @@
+/*
+Theme Name: Smart Mag Child
+Theme URI: http://theme-sphere.com/
+Description: A child theme of SmartMag
+Author: ThemeSphere
+Author URI: http://theme-sphere.com
+Template: smart-mag
+Version: 1.0
+*/
+
+@media only screen and (max-width: 514px) {
+  .row-direction {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1023px) {
+  .row-direction {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 1406px) {
+  .wrap, .boxed .main-wrap {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .sticky-nav {
+    left: 0;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+
+  .main-head header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .main-head .title {
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .main-content.col-8 {
+    width: 50%;
+  }
+  .sidebar.col-4 {
+    width: 50%;
+  }
+  .no-sidebar .main-content {
+    width: 100%;
+  }
+
+  .main .sidebar .widget {
+    margin-bottom: 0;
+  }
+
+  ul.commercial-block li {
+    max-width: 215px;
+  }
+
+  ul.commercial-block li img{
+    height: 200px!important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .menu-categories-container > ul.menu {
+    display: flex;
+    justify-content: space-between;
+  }
+  ul.commercial-block li {
+    max-width: 260px;
+  }
+  ul.commercial-block li img{
+    height: 250px!important;
+  }
+}
+
+@media only screen and (min-width: 1359px) {
+  ul.commercial-block li {
+    max-width: 300px;
+  }
+  ul.commercial-block li img{
+    height: unset;
+  }
+
+  .main .sidebar .widget {
+    margin-bottom: 35px;
+  }
+}
+
+@media only screen and (min-width: 515px) and (max-width: 670px) {
+  ul.commercial-block li {
+    max-width: 210px;
+  }
+  ul.commercial-block li img {
+    height: 200px!important;
+  }
+  .main .sidebar .widget {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 671px) and (max-width: 799px) {
+  ul.commercial-block li {
+    max-width: 290px;
+  }
+
+  ul.commercial-block li img {
+    height: 250px!important;
+  }
+}
+
