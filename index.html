@@ -1,34 +1,875 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="description" content="My Personal Website">
-    <meta name="keywords" content="Dominic Holified">
-    <meta name="viewport" content="width=device-width, initial-scale=0.80">
-    <title>Dominic Holifield</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
+<!--[if IE 8 ]><html class="no-js oldie ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]><html class="no-js oldie ie9" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<head>
 
-  <body>
-    <header>
-      <div class="menu">
-        <a href="index.html" style="color: white;">Home</a>
-        <a href="about.html">About Me</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </header>
+   <!--- basic page needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>Dominic Holifield</title>
+	<meta name="description" content="">  
+	<meta name="author" content="">
 
-    <main>
-      <div class="container">
-        <div class="vert-center">
-          <h1>Dominic Holifield</h1>
-          <hr>
-          <h2>Mechanical Engineer</h2>
-          <h2>Developer</h2>
-          <h2>Maker</h2>
-        </div>
-      </div>
-    </main>
-  </body>
+   <!-- mobile specific metas
+   ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+ 	<!-- CSS
+   ================================================== -->
+   <link rel="stylesheet" href="css/base.css">  
+   <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="css/vendor.css">     
+
+   <!-- script
+   ================================================== -->   
+	<script src="js/modernizr.js"></script>
+	<script src="js/pace.min.js"></script>
+
+   <!-- favicons
+	================================================== -->
+	<link rel="icon" type="image/png" href="favicon.ico">
+
+</head>
+
+<body id="top">
+
+	<!-- header 
+   ================================================== -->
+   <header>   	
+   	<div class="row">
+
+   		<div class="top-bar">
+   			<a class="menu-toggle" href="#"><span>Menu</span></a>
+
+	   		<!--<div class="logo">
+		         <a href="index.html">Dominic</a>
+		      </div>		      -->
+
+		   	<nav id="main-nav-wrap">
+					<ul class="main-navigation">
+						<li class="current"><a class="smoothscroll"  href="#intro" title="">Home</a></li>
+						<li><a class="smoothscroll"  href="#about" title="">About</a></li>
+						<li><a class="smoothscroll"  href="#resume" title="">Resume</a></li>
+						<li><a class="smoothscroll"  href="#portfolio" title="">Portfolio</a></li>
+						<li><a class="smoothscroll"  href="#news" title="">News</a></li>					
+						<li><a class="smoothscroll"  href="#contact" title="">Contact</a></li>	
+					</ul>
+				</nav>    		
+   		</div> <!-- /top-bar --> 
+   		
+   	</div> <!-- /row --> 		
+   </header> <!-- /header -->
+
+	<!-- intro section
+   ================================================== -->
+   <section id="intro">   
+
+   	<div class="intro-overlay"></div>	
+
+   	<div class="intro-content">
+   		<div class="row">
+
+   			<div class="col-twelve">
+
+	   			<h5>Hello, World.</h5>
+	   			<h1>I'm Dominic Holifield.</h1>
+
+	   			<p class="intro-position">
+	   				<span>Mechanical Engineer</span>
+	   				<span>Developer</span>
+	   				<span>Maker</span>
+	   			</p>
+
+	   			<a class="button stroke smoothscroll" href="#about" title="">More About Me</a>
+
+	   		</div>  
+   			
+   		</div>   		 		
+   	</div> <!-- /intro-content --> 
+
+   	<ul class="intro-social">        
+		<li><a href="https://www.youtube.com/channel/UCvKB88ouK7Tw23poxfywYtg" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+		<li><a href="https://github.com/dholifield" target="_blank"><i class="fa fa-github"></i></a></li>
+		<li><a href="https://www.linkedin.com/in/dominicholifield/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+		<li><a href="https://open.spotify.com/user/dholifield59?si=b14f7bb004be44e2" target="_blank"><i class="fa fa-spotify"></i></a></li>
+		<li><a href="https://www.instagram.com/dominicholifield/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+		<li><a href="https://steamcommunity.com/id/domininic/" target="_blank"><i class="fa fa-steam"></i></a></li>
+      </ul> <!-- /intro-social -->      	
+
+   </section> <!-- /intro -->
+
+
+   <!-- about section
+   ================================================== -->
+   <section id="about">  
+
+   	<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>About</h5>
+   			<h1>Let me introduce myself.</h1>
+
+   			<div class="intro-info">
+
+   				<img src="images/profile-pic.jpg" alt="Profile Picture">
+
+   				<p class="lead">I'm a junior at Purdue University studying Mechanical Engineering and Computer Science. Beyond school, I am deeply involved with the VEXU competetive robotics team 
+					<a href="https://purduesigbots.com/" target="_blank">Purdue ACM SIGBots</a> where I've gained a tremendous amount of experience as well as through research and personal projects.</p>
+   			</div>   			
+
+   		</div>   		
+   	</div> <!-- /section-intro -->
+
+   	<div class="row about-content">
+
+		<div class="col-six tab-full">
+
+			<h3>Skills</h3>
+			<p>I have learned many skills throughout my 6+ years of competition robotics as well as through research and personal projects. Here are some of the abilities I have most experience with: </p>
+
+			 <ul class="skill-bars">
+				<li>
+					<div class="progress percent90"><span>90%</span></div>
+					<strong>Autodesk Inventor</strong>
+				</li>
+				<li>
+					<div class="progress percent90"><span>90%</span></div>
+					<strong>Competition Robotics</strong>
+				</li>
+				<li>
+					<div class="progress percent80"><span>80%</span></div>
+				   	<strong>3D Printing</strong>
+				</li>
+   
+			 </ul> <!-- /skill-bars -->		
+
+		</div>
+
+   		<div class="col-six tab-full">
+
+   			<h3>Programming</h3>
+   			<p>I've spent many hours programming in a variety of languages, whether it be control algorithms for robotics, games built in Python, or a multitude of programming assignments.</p>
+
+				<ul class="skill-bars">
+				   <li>
+				   	<div class="progress percent80"><span>80%</span></div>
+				   	<strong>Python</strong>
+				   </li>
+				   <li>
+				   	<div class="progress percent75"><span>75%</span></div>
+				   	<strong>C, C++, & Java</strong>
+				   </li>
+				   <li>
+					<div class="progress percent60"><span>60%</span></div>
+					<strong>Matlab & HTML</strong>
+				   </li>
+      
+				</ul> <!-- /skill-bars -->		
+
+   		</div>
+
+   	</div>
+
+   	<div class="row button-section">
+   		<div class="col-twelve">
+   			<a href="#contact" title="Hire Me" class="button stroke smoothscroll">Hire Me</a>
+   			<a href="docs/Dominic Holifield Resume.pdf" target="_blank" title="Download Resume" class="button button-primary">Download Resume</a>
+   		</div>   		
+   	</div>
+
+   </section> <!-- /process-->    
+
+
+   <!-- resume Section
+   ================================================== -->
+	<section id="resume" class="grey-section">
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>Resume</h5>
+   			<h1>More of my credentials.</h1>
+
+   			<!--<p class="lead">Lorem ipsum Do commodo in proident enim in dolor cupidatat adipisicing dolore officia nisi aliqua incididunt Ut veniam lorem ipsum Consectetur ut in in eu do.</p>-->
+
+   		</div>   		
+   	</div> <!-- /section-intro--> 
+
+   	<div class="row resume-timeline">
+
+   		<div class="col-twelve resume-header">
+
+   			<h2>Work Experience</h2>
+
+   		</div> <!-- /resume-header -->
+
+   		<div class="col-twelve">
+
+   			<div class="timeline-wrap">
+
+				<div class="timeline-block">
+
+					<div class="timeline-ico">
+						<i class="fa fa-gears"></i>
+					</div>
+
+					<div class="timeline-header">
+						<h3>Competition Robotics</h3>
+						<p>August 2016 - Present</p>
+					</div>
+
+					<div class="timeline-content">
+						<h4>Purdue ACM SIGBots</h4>
+						<p><b>2022 VEXU World Skills Champion (team BLRS2) <br>
+						2020 Kalahari Classic Tournament Champion (team 7701T)</b><br>
+					Work with a large team to design, build, and optimize static and dynamic systems for a competition robot. This process implements CAD, prototyping, manufacturing, 
+					and design improvements. Program control algorithms such as PID, pose tracking algorithms like odometry, and autonomous routes for robots combining chassis and
+					mechanism control. Maintain and develop a robot chassis control library developed for our robots and the public. Utilize various sensors including optical shaft 
+					encoders, inertial measurement units, and infrared light sensors to	optimize the robots' performance. Operate robots during matches to compete against universities 
+					from around the US and the world.
+					</p>
+					</div>
+
+				</div> <!-- /timeline-block -->
+
+   				<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-code"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Undergraduate Research</h3>
+	   					<p>January 2021 - May 2021</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>Autonomous Motorsports Purdue</h4>
+	   					<p>Worked with a team to develop a waypoint-based approach to autonomous driving and racing. This was a part of Vertically Integrated Projects (VIP) at Purdue 
+							that involves students from all years working together. For this project, we created simulations in Unity using a vehicle physics environment, a convolutional
+							neural network, and PID control algorithms to develop a method of navigating roads autonomously. We worked alongside a team that competed in the 2021 
+							<a href="https://www.indyautonomouschallenge.com/" target="_blank">Indy Autonomous Challenge</a>.</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+	   			<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-briefcase"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Store Associate</h3>
+	   					<p>August 2019 - January 2022</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>The UPS Store</h4>
+	   					<p>Worked with many customers to pack and ship items to UPS standards. Completed various tasks including printing, laminating, binding, and designing documents, 
+							flyers, and business cards. Gained experience in retail, news, and working with computer programs and applications.</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+	   			<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-car"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Dasher</h3>
+	   					<p>May 2022 - Present</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>DoorDash</h4>
+	   					<p>Handled frequent food delivery orders efficiently and have received high customer ratings. Managed deliveries timely in a dynamic fast-paced environment by driving 
+							effective routes and communicating with customers.</p>
+	   				</div>
+
+	   			</div> <!-- /timeline-block -->
+
+   			</div> <!-- /timeline-wrap -->   			
+
+   		</div> <!-- /col-twelve -->
+   		
+   	</div> <!-- /resume-timeline -->
+   	
+   	<!--<div class="row resume-timeline">
+
+   		<div class="col-twelve resume-header">
+
+   			<h2>Education</h2>
+
+   		</div> <!- /resume-header ->
+
+   		<div class="col-twelve">
+
+   			<div class="timeline-wrap">
+
+   				<div class="timeline-block">
+
+	   				<div class="timeline-ico">
+	   					<i class="fa fa-graduation-cap"></i>
+	   				</div>
+
+	   				<div class="timeline-header">
+	   					<h3>Bachelor Degree</h3>
+	   					<p>August 2020 - May 2024</p>
+	   				</div>
+
+	   				<div class="timeline-content">
+	   					<h4>Purdue University</h4>
+	   					<p>Majoring in Mechanical Engineering with a minor in Computer Science.</p>
+	   				</div>
+
+	   			</div> <!- /timeline-block ->
+
+   			</div> <!- /timeline-wrap ->   			
+
+   		</div> <!- /col-twelve ->
+   		
+   	</div> <!- /resume-timeline -->
+		
+	</section> <!-- /features -->
+
+
+	<!-- Portfolio Section
+   ================================================== -->
+	<section id="portfolio">
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>Portfolio</h5>
+   			<h1>Check out some of my works.</h1>
+
+   			<p class="lead">Here are a few of the projects I've worked on. Click on an image for more information.</p>
+
+   		</div>   		
+   	</div> <!-- /section-intro--> 
+
+   	<div class="row portfolio-content">
+
+   		<div class="col-twelve">
+
+   			<!-- portfolio-wrapper -->
+	         <div id="folio-wrapper" class="block-1-2 block-mob-full stack">
+
+	         	<div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/tip.jpg" alt="BLRS2 - Tipping Point">
+	                  <a href="#modal-01" class="overlay">	                  	           
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+		     					       <h3 class="folio-title">BLRS2 - Tipping Point</h3>	     					    
+		     					    	 <span class="folio-types">
+											VEXU Robotics 2021-2022
+		     					       </span>
+		     					   </div>	                      	
+	                     </div>                    
+	                  </a>
+	               </div>	               
+	        		</div> <!-- /folio-item -->
+
+	        		<div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/cu.jpg" alt="BLRS - Change Up">
+	               	<a href="#modal-02" class="overlay">              		                  
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">BLRS - Change Up</h3>	     					    
+		     					    	<span class="folio-types">
+											VEXU Robotics 2020-2021
+		     					      </span>		     		
+		     					   </div> 	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> <!-- /folio-item -->
+
+	            <div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/pong.gif" alt="2.5D Pong">
+	                  <a href="#modal-03" class="overlay">             		                  
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">2.5D Pong</h3>	     					    
+		     					    	<span class="folio-types">
+											Python Game
+		     					      </span>		     		
+		     					   </div> 	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> <!-- /folio-item -->
+
+	            <div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/kb.jpg" alt="Custom Keyboard">
+	                  <a href="#modal-04" class="overlay">                  	                 
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">Custom Keyboard</h3>	     					    
+		     					    	<span class="folio-types">
+											3D Printed, Hand-Wired, Mechanical Keyboard
+		     					      </span>		     		
+		     					   </div>  	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> <!-- /folio-item -->     
+
+	        		<div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/tt.jpg" alt="7701T - Tower Takeover">
+	                  <a href="#modal-05" class="overlay">             		                  
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">7701T - Tower Takeover</h3>	     					    
+		     					    	<span class="folio-types">
+											VEX Robotics 2019-2020
+		     					      </span>		     		
+		     					   </div> 	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> <!-- /folio-item -->
+
+	            <div class="bgrid folio-item">
+	               <div class="item-wrap">
+	               	<img src="images/portfolio/tp.jpg" alt="Salad">
+	                  <a href="#modal-06" class="overlay">
+	                     <div class="folio-item-table">
+	                     	<div class="folio-item-cell">
+	                     		<h3 class="folio-title">7701T - Turning Point</h3>	     					    
+		     					    	<span class="folio-types">
+											VEX Robotics 2018-2019
+		     					      </span>		     		
+		     					   </div>	                      	
+	                     </div>                    
+	                  </a>
+	               </div>
+	        		</div> <!-- /folio-item -->   
+
+	            <!-- modal popups - begin
+	            ============================================================= -->
+	            <div id="modal-01" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/gallery/tip.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>BLRS2 - Tipping Point</h4>		      
+					      <p>This was one of my best seasons yet as we were the <b>2022 VEXU World Skills Champions!</b> This was at the world championship hosted in Dallas, Texas where
+							we competed against other colleges from around the world. This was a result of the hard work my team and I put in throughout the year which was super fun
+							and I've learned so much. <a href="https://youtu.be/kSVlATxMqhQ" target="_blank">Here is a video</a> of the robot in action and 
+							<a href="https://youtu.be/xmrJk5sAhok" target="_blank">here is a video</a> of me explaining some of the mechanisms.</p>
+
+					      <div class="categories">VEXU Robotics 2021-2022</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="https://youtu.be/KFLVLQZnPwU" target="_blank">Reveal Video</a>
+					    <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-01 -->
+
+				   <div id="modal-02" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/gallery/cu.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>BLRS - Change Up</h4>		      
+					      <p>...</p>
+
+					      <div class="categories">VEXU Robotics 2020-2021</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="https://youtu.be/rnIDxDXYy74" target="_blank">Reveal Video</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-02 -->
+
+				   <div id="modal-03" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/pong.gif" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>2.5D Pong</h4>		      
+					      <p>...</p>
+
+					      <div class="categories">Python Game</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="https://github.com/dholifield/2.5DPong" target="_blank">Try it out!</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-03 -->
+
+				   <div id="modal-04" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/gallery/kb.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>Custom Keyboard</h4>		      
+					      <p>...</p>
+
+					      <div class="categories">3D Printed, Hand-Wired, Mechanical Keyboard</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="http://www.behance.net">Details</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-04 -->
+
+				   <div id="modal-05" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/gallery/tt.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>7701T - Tower Takeover</h4>		      
+					      <p>...</p>
+
+					      <div class="categories">VEX Robotics 2019-2020</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="https://youtu.be/RPXdqgSQvwg" target="_blank">In Action</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-05 -->
+
+				   <div id="modal-06" class="popup-modal slider mfp-hide">	
+
+				     	<div class="media">
+				     		<img src="images/portfolio/gallery/tp.jpg" alt="" />
+				     	</div>      	
+
+					   <div class="description-box">
+					      <h4>7701T - Turning Point</h4>		      
+					      <p>...</p>
+
+					      <div class="categories">VEX Robotics 2018-2019</div>			               
+					   </div>
+
+			         <div class="link-box">
+			            <a href="https://youtu.be/-zMaI7In0Go" target="_blank">Reveal Video</a>
+					      <a href="#" class="popup-modal-dismiss">Close</a>
+			         </div>		      
+
+				   </div> <!-- /modal-06 -->
+
+
+				   <!-- modal popups - end
+	            ============================================================= -->
+
+	         </div> <!-- /portfolio-wrapper --> 
+
+   		</div>  <!-- /twelve -->   
+
+   	</div> <!-- /portfolio-content --> 
+		
+	</section> <!-- /portfolio --> 
+
+	
+	<!-- news Section
+   ================================================== -->
+	<section id="news">
+
+		<div class="overlay"></div>
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>In the News</h5>
+   			<h1>Check out some of the articles I'm in.</h1>
+
+   		</div>   		
+   	</div> <!-- /section-intro -->
+
+   	<div class="row news-content">
+
+   		<div id="owl-slider" class="owl-carousel news-list">
+
+	      	<div class="service">	
+
+				<span class="icon"><a href="https://www.jconline.com/story/news/2022/05/13/purdue-robotics-team-win-2022-vex-robot-world-championship/9714204002/" target="_blank"><i class="icon-newspaper"></i></a></span>
+
+	            <div class="service-content">	
+					
+	            	 <a href="https://www.jconline.com/story/news/2022/05/13/purdue-robotics-team-win-2022-vex-robot-world-championship/9714204002/" target="_blank">
+						Purdue's Robotics Team, SIGBots, wins world championship in skills category.
+					 </a>
+					 <h4>Journal & Courier</h4>
+		            <p class="desc">Purdue's robotics team, SIGBots, placed first in the Skills competition at the 2022 VEX Robotics World Championship earlier this month...
+	         		</p>
+					
+	         		
+	         	</div> 	         	 
+
+				</div> <!-- /service -->
+
+				<div class="service">	
+
+					<span class="icon"><a href="https://www.youarecurrent.com/2022/05/19/zchs-graduate-helps-purdue-robotics-team-win-skills-competition/" target="_blank"><i class="icon-newspaper"></i></a></span>
+
+	            <div class="service-content">	
+					
+	            	<a href="https://www.youarecurrent.com/2022/05/19/zchs-graduate-helps-purdue-robotics-team-win-skills-competition/" target="_blank">
+						Zionsville Community High School graduate helps Purdue robotics team win skills competition.
+					</a>
+					<h4>Current</h4>
+		            <p class="desc">For Purdue University sophomore Dominic Holifield and his robotics team, the long hours of practice paid off in a global competition...
+	         		</p>
+
+	            </div>	                          
+
+			   </div> <!-- /service -->
+
+			   <div class="service">
+
+				<span class="icon"><a href="https://www.wlfi.com/community/purdue-sigbots-take-on-the-world/article_8eae4e76-981d-11ec-92aa-a74a2f375f42.html" target="_blank"><i class="icon-newspaper"></i></a></span>
+	            <div class="service-content">
+					
+	            	<a href="https://www.wlfi.com/community/purdue-sigbots-take-on-the-world/article_8eae4e76-981d-11ec-92aa-a74a2f375f42.html" target="_blank">
+						Purdue SIGBots take on the world.
+					</a>
+					<h4>WLFI</h4>
+		            <p class="desc">Purdue University's competitive robotics team, Purdue SIGBots, swept their last tournament.  Now, they're ready to take on the world.
+						Purdue SIGBots will be competing at the world championships in Dallas this May...
+	        		</p> 
+					
+	            </div> 	            	               
+
+			   </div> <!-- /service -->
+
+				<div class="service">
+
+					<span class="icon"><a href="https://www.jconline.com/story/news/2022/02/21/purdues-robotics-teams-dominate-often-facing-each-other-finals/6799153001/" target="_blank"><i class="icon-newspaper"></i></a></span>
+
+	            <div class="service-content">
+
+	            	<a href="https://www.jconline.com/story/news/2022/02/21/purdues-robotics-teams-dominate-often-facing-each-other-finals/6799153001/" target="_blank">
+						Purdue's robotics teams dominate, often facing each other in finals.
+					</a>
+					<h4>Journal & Courier</h4>
+		            <p class="desc">The Purdue University robotics team, SIGBots, have performed exceptionally well this season and plan to keep up their skills at the 2022 VEX Robotics World Tournament in May...
+	         		</p> 
+	         		
+	            </div>                
+
+				</div> <!-- /service -->
+
+			   <div class="service">
+
+				<span class="icon"><a href="https://www.purdueexponent.org/campus/article_3f11b539-2d77-5d99-85a3-fee2d3176b61.html?fbclid=IwAR2kTmpVckpPxD4U5j38GVQxhRSvdW5VnR-hg1je0CoJf_6HcrcN3rj_lVo" target="_blank"><i class="icon-newspaper"></i></a></span>
+
+	            <div class="service-content">
+
+	            	<a href="https://www.purdueexponent.org/campus/article_3f11b539-2d77-5d99-85a3-fee2d3176b61.html?fbclid=IwAR2kTmpVckpPxD4U5j38GVQxhRSvdW5VnR-hg1je0CoJf_6HcrcN3rj_lVo" target="_blank">
+						Boiler robots dominate, advance to world championship.
+					</a>
+					<h4>The Exponent</h4>
+		            <p class="desc">Purdue' SigBots robotics club scored yet another victory in the VEX U robotics qualifier at the Purdue Memorial Union on Saturday,
+						earning a spot in the annual VEX Robotics World Championship for the seventh time in a row...
+	        			</p> 
+
+	            </div>	               
+
+			   </div> <!-- /service ->
+
+			   <div class="service">
+
+			   	<span class="icon"><i class="icon-newspaper"></i></span>	   	           
+
+	            <div class="service-content">
+
+	            	 <h3>Consultancy</h3>
+
+		            <p class="desc">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.
+	        			</p> 
+	        			
+	            </div>	               
+
+			   </div> <!- /service -->
+
+	      </div> <!-- /news-list -->
+   		
+   	</div> <!-- /news-content -->
+		
+	</section> <!-- /news -->	
+
+	
+   <!-- contact
+   ================================================== -->
+	<section id="contact">
+
+		<div class="row section-intro">
+   		<div class="col-twelve">
+
+   			<h5>Contact</h5>
+   			<h1>I'd Love To Hear From You.</h1>
+
+   		</div> 
+   	</div> <!-- /section-intro -->
+
+   	<div class="row contact-form">
+
+   		<div class="col-twelve">
+
+            <!-- form -->
+            <form name="contactForm" id="contactForm" method="post" action="">
+      			<fieldset>
+
+                  <div class="form-field">
+ 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
+                  </div>
+                  <div class="form-field">
+	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
+	               </div>
+                  <div class="form-field">
+	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
+	               </div>                       
+                  <div class="form-field">
+	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
+	               </div>                      
+                 <div class="form-field">
+                     <button class="submitform">Submit</button>
+                     <div id="submit-loader">
+                        <div class="text-loader">Sending...</div>                             
+       				      <div class="s-loader">
+								  	<div class="bounce1"></div>
+								  	<div class="bounce2"></div>
+								  	<div class="bounce3"></div>
+								</div>
+							</div>
+                  </div>
+
+      			</fieldset>
+      		</form> <!-- Form End -->
+
+            <!-- contact-warning -->
+            <div id="message-warning">            	
+            </div>            
+            <!-- contact-success -->
+      		<div id="message-success">
+               <i class="fa fa-check"></i>Your message was sent, thank you!<br>
+      		</div>
+
+         </div> <!-- /col-twelve -->
+   		
+   	</div> <!-- /contact-form -->
+
+   	<div class="row contact-info">
+
+   		<div class="col-four tab-full">
+
+   			<div class="icon">
+   				<i class="icon-pin"></i>
+   			</div>
+
+   			<h5>Where to find me</h5>
+
+   			<p>
+            Zionsville, Indiana<br>
+            46077 United States
+            </p>
+
+   		</div>
+
+   		<div class="col-four tab-full collapse">
+
+   			<div class="icon">
+   				<i class="icon-mail"></i>
+   			</div>
+
+   			<h5>Email Me At</h5>
+
+   			<p>dholifi@purdue.edu</p>
+
+   		</div>
+
+   		<div class="col-four tab-full">
+
+   			<div class="icon">
+   				<i class="icon-phone"></i>
+   			</div>
+
+   			<h5>Call Me At</h5>
+
+   			<p>Mobile: +1 (317) 832 5039</p>
+
+   		</div>
+   		
+   	</div> <!-- /contact-info -->
+		
+	</section> <!-- /contact -->
+
+
+   <!-- footer
+   ================================================== -->
+
+   <footer>
+     	<div class="row">
+
+     		<div class="col-six tab-full pull-right social">
+
+     			<ul class="footer-social">        
+					<li><a href="https://www.youtube.com/channel/UCvKB88ouK7Tw23poxfywYtg" target="_blank"><i class="fa fa-youtube-play"></i></a></li>
+					<li><a href="https://github.com/dholifield" target="_blank"><i class="fa fa-github"></i></a></li>
+					<li><a href="https://www.linkedin.com/in/dominicholifield/" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+					<li><a href="https://open.spotify.com/user/dholifield59?si=b14f7bb004be44e2" target="_blank"><i class="fa fa-spotify"></i></a></li>
+					<li><a href="https://www.instagram.com/dominicholifield/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+					<li><a href="https://steamcommunity.com/id/domininic/" target="_blank"><i class="fa fa-steam"></i></a></li>
+			   </ul> 
+	      		
+	      </div>
+
+      	<div class="col-six tab-full">
+	      	<div class="copyright">
+		        	<span>Website by Dominic Holifield</span> 
+		        	<span>Design by <a href="http://www.styleshout.com/">styleshout</a></span>	         	
+		         </div>		                  
+	      	</div>
+
+	      	<div id="go-top">
+		         <a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-long-arrow-up"></i></a>
+		      </div>
+
+      	</div> <!-- /row -->     	
+   </footer>  
+
+   <div id="preloader"> 
+    	<div id="loader"></div>
+   </div> 
+
+   <!-- Java Script
+   ================================================== --> 
+   <script src="js/jquery-2.1.3.min.js"></script>
+   <script src="js/plugins.js"></script>
+   <script src="js/main.js"></script>
+
+</body>
+
 </html>
