@@ -1918,6 +1918,13 @@ header .logo a {
 	line-height: 2.4rem;
 	margin-bottom: 12px;
 }
+.popup-modal .description-box a {
+	color: #E59900;
+	text-decoration: underline;
+}
+.popup-modal .description-box a:hover {
+	color: #CFB787;
+}
 .popup-modal .categories {
 	font-family: "poppins-bold", sans-serif;
 	font-size: 1.1rem;
@@ -2385,7 +2392,7 @@ header .logo a {
 	color: #FFFFFF;
 }
 #contact button.submitform:hover, #contact button.submitform:focus {
-	background: #CFB787;
+	background: #CEC0A5;
 }
 #message-warning, #message-success {
 	display: none;
