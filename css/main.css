@@ -703,6 +703,7 @@ input[type="reset"].button-primary,
 input[type="button"].button-primary {
 	background: #313131;
 	color: #FFFFFF;
+	border-radius: 10px;
 }
 .button.button-primary:hover,
 a.button.button-primary:hover,
@@ -735,6 +736,7 @@ button.stroke, .button.stroke {
 	background: transparent !important;
 	border: 3px solid #313131;
 	line-height: 4.8rem;
+	border-radius: 10px;
 }
 button.stroke.medium, .button.stroke.medium {
 	line-height: 5.1rem !important;
@@ -1106,8 +1108,10 @@ header .top-bar {
 	min-width: 135px;
 	min-height: 66px;
 	position: absolute;
-	left: 90px;
+	left: 0;
 	top: 0;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 header .logo {
 	float: left;
@@ -1388,6 +1392,7 @@ header .logo a {
 	font-size: 1.3rem;
 	text-transform: uppercase;
 	letter-spacing: .25rem;
+	border-radius: 10px;
 }
 .intro-content .button:hover, .intro-content .button:focus {
 	border-color: #CFB787;
@@ -2397,6 +2402,7 @@ header .logo a {
 	width: 100%;
 	background: #CFB787;
 	color: #FFFFFF;
+	border-radius: 10px;
 }
 #contact button.submitform:hover, #contact button.submitform:focus {
 	background: #CEC0A5;
@@ -2607,7 +2613,7 @@ footer .copyright span:last-child::after {
 	text-decoration: none;
 	border: 0 none;
 	display: block;
-	height: 6.6rem;
+	height: 6rem;
 	width: 6rem;
 	line-height: 6.6rem;
 	text-align: center;
@@ -2620,6 +2626,7 @@ footer .copyright span:last-child::after {
 	-webkit-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
+	border-top-left-radius: 10px;
 }
 #go-top a i {
 	font-size: 1.6rem;
