@@ -4,7 +4,7 @@ order: 2
 description: >
   Designed a custom split keyboard end-to-end: PCB layout, firmware, and enclosure,
   optimized for ergonomics and minimal component count with a reversible PCB.
-thumbnail: kb-326.jpg
+thumbnail: photos/kb-326.jpg
 thumbnail_alt: Mechanical Keyboard
 ---
 

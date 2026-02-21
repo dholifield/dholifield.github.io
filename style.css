@@ -84,12 +84,16 @@ p a {
   flex-wrap: wrap;
   gap: 0.5em;
   margin: 0 0 1.5em;
-  padding-bottom: 1.5em;
-  border-bottom: 1px solid #ddd;
 }
 
 .links a {
   padding: 0.25em 0.5em;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 0 0 1.5em;
 }
 
 /* projects */

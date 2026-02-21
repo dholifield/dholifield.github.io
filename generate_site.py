@@ -3,6 +3,7 @@ import markdown
 import glob
 import math
 import os
+import sys
 import re
 from colorsys import rgb_to_hsv
 from datetime import date
@@ -109,11 +110,19 @@ os.makedirs("site/projects", exist_ok=True)
 
 # --- index.html generation ---
 
+print("Generating index.html ... ", end="", flush=True)
+if "name" not in profile:
+    sys.exit("Error: profile.md is missing required field 'name'")
+if "bio" not in profile:
+    sys.exit("Error: profile.md is missing required field 'bio'")
 name = profile["name"]
 bio = profile["bio"].strip()
-portrait = profile["portrait"]
-bg = profile.get("background") or "#f7f7f2"
-accent = profile.get("accent") or "#899878"
+portrait = profile.get("portrait")
+bg = profile.get("background") or "f7f7f2"
+accent = profile.get("accent") or "899878"
+bg = bg if bg.startswith("#") else f"#{bg}"
+accent = accent if accent.startswith("#") else f"#{accent}"
+section_label = profile.get("section", "Projects")
 
 INDEX_TEMPLATE = """\
 {head}
@@ -128,19 +137,15 @@ INDEX_TEMPLATE = """\
 
   <main>
     <div class="intro">
-      <img src="content/{portrait}" alt="{name}" class="portrait">
+{portrait_img}
       <p>{bio}</p>
     </div>
 
-    <div class="skills">
-{skills_spans}
-    </div>
+{skills_section}
+{links_section}
+    <hr>
 
-    <p class="links">
-{ext_links}
-    </p>
-
-    <h2>Projects</h2>
+    <h2>{section_label}</h2>
     <ul class="projects">
 {project_items}
     </ul>
@@ -163,10 +168,15 @@ def build_project_item(slug, project):
     img = ""
     if thumbnail:
         cls = f' class="{thumbnail_class}"' if thumbnail_class else ""
-        img = f'\n        <img src="content/projects/photos/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
+        img = f'\n        <img src="content/projects/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
 
     link = ""
-    if project.content.strip():
+    redirect = project.get("redirect")
+    if redirect:
+        if project.content.strip():
+            print(f"Warning: {slug}.md has a redirect and body content; body will be ignored")
+        link = f'\n          <a href="{redirect}">read more ↝</a>'
+    elif project.content.strip():
         link = f'\n          <a href="site/projects/{slug}.html">read more ↝</a>'
 
     return f"""\
@@ -186,12 +196,19 @@ if has_photography:
 nav_links = "\n".join(
     f'      <a href="{url}">{label}</a>' for url, label in _nav
 )
-skills_spans = "\n".join(
-    f"      <span>{s}</span>" for s in profile["skills"]
-)
-ext_links = "\n".join(
-    f'      <a href="{l["url"]}">{l["label"]}</a>' for l in profile["links"]
-)
+skills = profile.get("skills") or []
+links = profile.get("links") or []
+skills_section = ""
+if skills:
+    spans = "\n".join(f"      <span>{s}</span>" for s in skills)
+    skills_section = f'    <div class="skills">\n{spans}\n    </div>'
+portrait_img = ""
+if portrait:
+    portrait_img = f'      <img src="content/{portrait}" alt="{name}" class="portrait">'
+links_section = ""
+if links:
+    anchors = "\n".join(f'      <a href="{l["url"]}">{l["label"]}</a>' for l in links)
+    links_section = f'    <p class="links">\n{anchors}\n    </p>'
 project_items = "\n".join(
     build_project_item(os.path.splitext(os.path.basename(p))[0], proj)
     for p, proj in projects
@@ -202,21 +219,23 @@ index_html = INDEX_TEMPLATE.format(
     footer=page_footer(name, year),
     name=name,
     bio=bio,
-    portrait=portrait,
+    portrait_img=portrait_img,
     nav_links=nav_links,
-    skills_spans=skills_spans,
-    ext_links=ext_links,
+    skills_section=skills_section,
+    links_section=links_section,
     project_items=project_items,
+    section_label=section_label,
     year=year,
 )
 
 with open("index.html", "w", encoding="utf-8") as f:
     f.write(index_html)
-print("Generated index.html")
+print("done")
 
 # --- photography.html generation ---
 
 if has_photography:
+    print("Generating site/photography.html ... ", end="", flush=True)
     PHOTOGRAPHY_TEMPLATE = """\
 {head}
 <body>
@@ -247,7 +266,7 @@ if has_photography:
         with Image.open(f"content/photography/{f}") as img:
             w, h = img.size
             ratios[f] = h / w  # height relative to width (all rendered same width)
-            pixels = list(img.convert("RGB").resize((50, 50)).getdata())
+            pixels = list(img.convert("RGB").resize((50, 50)).get_flattened_data())
         sort_keys[f] = color_sort_key(pixels)
 
     # sort by dominant hue, then greedily assign to two columns to balance height
@@ -277,11 +296,12 @@ if has_photography:
     )
     with open("site/photography.html", "w", encoding="utf-8") as f:
         f.write(photography_html)
-    print("Generated site/photography.html")
+    print("done")
 
 # --- resume.html generation ---
 
 if has_resume:
+    print("Generating site/resume.html ... ", end="", flush=True)
     resume_pdf = glob.glob("content/*.pdf")[0]
 
     RESUME_TEMPLATE = """\
@@ -311,7 +331,7 @@ if has_resume:
     )
     with open("site/resume.html", "w", encoding="utf-8") as f:
         f.write(resume_html)
-    print("Generated site/resume.html")
+    print("done")
 
 # --- project page generation ---
 
@@ -336,6 +356,11 @@ PROJECT_TEMPLATE = """\
 for path, project in projects:
     if not project.content.strip():
         continue
+    if project.get("redirect"):
+        continue
+    slug = os.path.splitext(os.path.basename(path))[0]
+    output_path = f"site/projects/{slug}.html"
+    print(f"Generating {output_path} ... ", end="", flush=True)
     body = markdown.markdown(project.content, extensions=["fenced_code"])
     body = rewrite_project_paths(body)
     html = PROJECT_TEMPLATE.format(
@@ -347,8 +372,6 @@ for path, project in projects:
         body=body,
         year=year,
     )
-    slug = os.path.splitext(os.path.basename(path))[0]
-    output_path = f"site/projects/{slug}.html"
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
-    print(f"Generated {output_path}")
+    print("done")

@@ -37,21 +37,24 @@ The only file you must create. Controls the index page.
 name: Your Name
 bio: >
   A short paragraph about yourself.
-portrait: headshot.jpg          # photo in content/, shown on index page
-background: "#f7f7f2"            # optional — page background color
-accent: "#899878"                # optional — button/link color
-skills:
+portrait: headshot.jpg           # photo in content/, shown on index page
+skills:                          # optional — shown as tags on index page
   - Skill 1
   - Skill 2
-links:                          # external links shown below bio
-  - label: GitHub
-    url: https://github.com/yourname
+links:                           # optional — external links shown below bio
   - label: Email
     url: mailto:you@example.com
+  - label: GitHub
+    url: https://github.com/yourname
+section: Projects                # optional — heading above project list
+background: "#f7f7f2"            # optional — page background color 
+accent: "#899878"                # optional — button/link color
 ---
 ```
 
-Navigation links for Resume and Photography are generated automatically when the corresponding content exists (a PDF in `content/` or images in `content/photography/`).
+Navigation links for Resume and Photography are generated automatically when the corresponding content exists:
+- Resume: a PDF in `content/`
+- Photography: images in `content/photography/`
 
 ### Projects (`content/projects/*.md`)
 
@@ -63,12 +66,15 @@ title: Project Name              # required
 description: >                   # required — shown on index card
   One or two sentences.
 order: 1                         # optional — lower numbers appear first
-thumbnail: photo.jpg             # optional — from content/projects/photos/
+thumbnail: photos/photo.jpg      # optional
 thumbnail_alt: Alt text          # optional
 thumbnail_class: contain         # optional — adds CSS class to thumbnail
+redirect: https://example.com    # optional — link to external URL instead of detail page
 ---
 
 Markdown body content goes here. This becomes the project detail page.
+If `redirect` is set, the index card links to that URL and no detail page is generated.
+If no body is defined, the project will just exist on the home page
 ```
 
 Images and links in project markdown use paths relative to `content/projects/`:
