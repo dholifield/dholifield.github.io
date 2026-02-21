@@ -1,0 +1,238 @@
+/*
+Theme Name: Smart Mag Child
+Theme URI: http://theme-sphere.com/
+Description: A child theme of SmartMag
+Author: ThemeSphere
+Author URI: http://theme-sphere.com
+Template: smart-mag
+Version: 1.0
+*/
+
+@media only screen and (max-width: 514px) {
+  .row-direction {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1023px) {
+  .row-direction {
+    flex-wrap: wrap;
+  }
+}
+
+@media only screen and (max-width: 1406px) {
+  .wrap, .boxed .main-wrap {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .sticky-nav {
+    left: 0;
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 800px) {
+  #main-head header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 16px
+  }
+
+  .main-head .default .right {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main-head .default .title {
+    width: 75%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  #main-head .default .title {
+    width: 100%;
+  }
+
+  .main-head .wrap header {
+    margin-bottom: 11px;
+    gap: 12px;
+  }
+
+  .top-bar-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .top-bar-content label {
+    display: flex;
+  }
+
+  #dropdown:checked ~ .dropdown-container .dropdown-button {
+    transform: rotate(180deg);
+  }
+
+  #dropdown ~ ul li {
+    display: none;
+  }
+
+  #dropdown:checked ~ ul li {
+    display: flex;
+  }
+
+  #dropdown ~ ul li:last-child {
+    display: flex;
+  }
+
+  .top-bar ul {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .tob-bar-navigation ul > li {
+    width: 100%;
+  }
+
+  .wrap-button.adv-button, .wrap-button.bg-dark {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .main-content.col-8 {
+    width: 50%;
+  }
+  .sidebar.col-4 {
+    width: 50%;
+  }
+  .no-sidebar .main-content {
+    width: 100%;
+  }
+
+  .main .sidebar .widget {
+    margin-bottom: 0;
+  }
+
+  ul.commercial-block li {
+    max-width: 215px;
+  }
+
+  ul.commercial-block li img{
+    height: 200px!important;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .menu-categories-container > ul.menu {
+    display: flex;
+    justify-content: space-between;
+  }
+  ul.commercial-block li {
+    max-width: 260px;
+  }
+  ul.commercial-block li img{
+    height: 250px!important;
+  }
+}
+
+@media only screen and (min-width: 1359px) {
+  ul.commercial-block li {
+    max-width: 300px;
+  }
+  ul.commercial-block li img{
+    height: unset;
+  }
+
+  .main .sidebar .widget {
+    margin-bottom: 35px;
+  }
+}
+
+@media only screen and (min-width: 515px) and (max-width: 670px) {
+  ul.commercial-block li {
+    max-width: 210px;
+  }
+  ul.commercial-block li img {
+    height: 200px!important;
+  }
+  .main .sidebar .widget {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 671px) and (max-width: 799px) {
+  ul.commercial-block li {
+    max-width: 290px;
+  }
+
+  ul.commercial-block li img {
+    height: 250px!important;
+  }
+}
+
+@media only screen and (max-width: 799px) {
+  /*
+   * Top Bar
+   */
+  .top-bar .wrap .search {
+    display: none;
+  }
+
+  .tob-bar-navigation {
+    justify-content: center
+  }
+
+  .top-bar ul {
+    justify-content: center;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+  .top-bar .search {
+    margin: 2px 0px 0px 0px;
+  }
+}
+
+@media only screen and (max-width: 1128px) {
+  .navigation .menu li > a {padding: 0 25px;}
+}
+
+@media only screen and (max-width: 799px) {
+  .navigation .menu > li > a {
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 514px) {
+  .top-bar .search .query,
+  .top-bar .search .query:focus {
+    width: 240px;
+  }
+
+  body .yarpp-thumbnails-horizontal .yarpp-thumbnail {
+    width: 49%;
+    margin-right: 2%;
+  }
+
+  body .yarpp-thumbnails-horizontal .yarpp-thumbnail:nth-child(3n) {
+    margin-right: 2%;
+  }
+
+  body .yarpp-thumbnails-horizontal .yarpp-thumbnail:nth-child(2n) {
+    margin-right: 0px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  body .yarpp-thumbnails-horizontal .yarpp-thumbnail,
+  body .yarpp-thumbnails-horizontal .yarpp-thumbnail:nth-child(3n) {
+    width: 100%;
+    margin-right: 0px;
+  }
+}

@@ -1,0 +1,391 @@
+/*
+Theme Name: Smart Mag Child
+Theme URI: http://theme-sphere.com/
+Description: A child theme of SmartMag
+Author: ThemeSphere
+Author URI: http://theme-sphere.com
+Template: smart-mag
+Version: 1.0
+*/
+
+/*@import url("../smart-mag/style.css");*/
+
+.wrap {
+  width: 1356px;
+}
+
+.boxed .main-wrap {
+  width: 1406px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.main-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  height: 100%;
+  min-height: 800px;
+}
+
+.wrapper, .main, .column, .center {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+}
+
+.main-footer {
+  width: 100%
+}
+
+.sticky-nav {
+  width: 1356px;
+}
+
+.has-nav-light .sticky-nav {
+  width: 1406px;
+}
+
+.row-direction {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-one, .row-two {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.social-link-table {
+ margin-top: 5px;
+	margin-bottom: 20px;
+}
+
+.social-link-item {
+  border: 0px solid #e1e1e1;
+  padding: 0px 5px;
+}
+
+.social-link-item img {
+  vertical-align: middle;
+  object-fit: contain;
+  height: 100%;
+  max-width: 100%;
+  max-height: 50px;
+}
+
+/*ul.commercial-block {*/
+/*  columns: 220px 2;*/
+/*}*/
+
+/*Safari fix*/
+/*ul.commercial-block li {*/
+/*  -webkit-column-break-inside: avoid; !* Chrome, Safari, Opera *!*/
+/*  page-break-inside: avoid; !* Firefox *!*/
+/*  break-inside: avoid; !* IE 10+ *!*/
+/*}*/
+/*END*/
+
+ul.commercial-block li {
+  float: left;
+  padding-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+ul.commercial-block li img{
+  width: 100%;
+  object-fit: contain;
+}
+
+.featured-grid .image-link img {
+  object-fit: cover;
+  width: 100%;
+}
+
+.post-header .featured img {
+  width: 100%;
+  height: auto;
+  /*object-fit: contain;*/
+  aspect-ratio: 3 / 2;
+  object-fit: cover
+}
+
+.main-head header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-head .wrap header {
+  min-height: unset;
+  line-height: unset;
+  margin: 20px 0 16px 0;
+  gap: 24px;
+}
+
+.main-head .default .title {
+  width: 35%;
+}
+
+.main-head .default .right {
+  line-height: unset;
+  width: 100%;
+}
+
+.main-head .right img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+/**
+ * 2.2. =Header
+ * ----------------------------------------------------------------------------
+ */
+
+.top-bar-content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+ .top-bar-content .tob-bar-navigation {
+  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.top-bar-content a {
+  display: flex;
+}
+
+.top-bar .search {
+  margin-top: 0;
+}
+
+#dropdown {
+  display: none;
+}
+
+.dropdown-container {
+  height: 32px;
+  width: 100%;
+  padding: 0 12px;
+  overflow: hidden;
+  transition: all .2s ease-in;
+  display: none;
+  align-items: center;
+  text-transform: uppercase;
+  justify-content: space-between;
+  background: #C51B1B;
+}
+
+.dropdown-container span {
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffffff;
+  text-shadow: 0 1px 3px black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-horn {
+  background-image: url("./assets/images/horn.svg");
+  min-width: 14px;
+  height: 14px;
+  display: flex;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.dropdown-button {
+  background-image: url("./assets/images/arrow.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  min-width: 14px;
+  height: 7px;
+  display: flex;
+}
+
+.top-bar ul {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.wrap-button a {
+  height: 32px;
+  padding: 0 12px;
+  font-weight: 500;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #ffffff;
+  text-shadow: 0 1px 3px black;
+  transition: all .2s ease-in;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  justify-content: center;
+}
+
+.wrap-button a:hover {
+  text-decoration: none;
+}
+
+.adv-button {
+background: #DD3333;
+}
+
+.adv-button:hover {
+background: #eb4343;
+}
+
+.bg-dark {
+background: #19232d;
+}
+
+.bg-dark:hover {
+background: #2f4154;
+}
+
+.navigation .menu ul .sub-menu.adaptive-sub-menu-position {
+  right: 100%;
+  left: unset;
+}
+
+.navigation ul li {
+  position: relative;
+}
+
+.menu-categories-container > ul.menu {
+  flex-wrap: wrap;
+}
+
+.adaptive-menu-position {
+  right: 0;
+}
+
+/**
+ * 4.3. =Single & Other Pages
+ * ----------------------------------------------------------------------------
+ */
+
+.wrap-user-registration {
+  max-width: 850px;
+  height: 100%;
+  margin: auto;
+  padding: 0 25px;
+  display: grid;
+  align-items: center;
+  color: #19232d;
+}
+
+.user-registration-content {
+  width: 100%;
+  margin: 28px 0 49px 0;
+  padding: 28px 0;
+  background: #fff;
+  border: 1px solid #e54e53;
+  border-right: 0;
+  border-left: 0;
+}
+
+.user-registration-content h2.head-title-registration {
+  margin-left: 20px;
+  font: 18px "Open Sans", Arial, sans-serif;
+  text-transform: uppercase;
+  border-left: 3px solid #e54e53;
+  padding-left: 14px;
+  line-height: 2;
+  margin-bottom: 28px;
+  word-wrap: break-word;
+}
+
+.user-registration {
+  font-weight: 700;
+}
+
+.ur-frontend-form .ur-button-container .ur-submit-button {
+  margin: auto;
+}
+
+.ur-frontend-form, .ur-frontend-form.login {
+  box-shadow: 0 2px 20px rgb(45 53 89 / 10%);
+  padding: 20px;
+}
+
+.ur-form-row {
+  width: 75%;
+  margin: auto;
+}
+
+.yarpp-thumbnails-horizontal {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+body .yarpp-thumbnails-horizontal .yarpp-thumbnail {
+  display: block;
+  width: 32%;
+  max-width: 100%;
+  height: auto;
+  padding: 5px;
+  box-sizing: border-box;
+  margin: 0px 2% 2% 0px;
+}
+
+body .yarpp-thumbnails-horizontal .yarpp-thumbnail:nth-child(3n) {
+  margin-right: 0px;
+}
+
+body .yarpp-related .yarpp-thumbnail-title {
+  max-width: 100%;
+  margin: 7px 0px 0px 0px;
+}
+
+.yarpp-thumbnails-horizontal .yarpp-thumbnail > img,
+.yarpp-thumbnails-horizontal .yarpp-thumbnail-default {
+  width: 100%;
+  height: auto;
+  margin: 0px;
+}
+
+.highlights a img,
+.yarpp-thumbnails-horizontal .yarpp-thumbnail > img,
+.yarpp-thumbnails-horizontal .yarpp-thumbnail-default {
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.highlights .meta,
+.highlights-box.three-col .highlights .meta {
+  margin-top: 0px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.featured-grid .image-link img {
+  aspect-ratio: 3 / 2;
+  height: auto;
+}
+
+.videoframe{
+box-shadow: 3px 3px 3px #888; }

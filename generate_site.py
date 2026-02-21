@@ -1,16 +1,83 @@
 import frontmatter
-import glob
 import markdown
+import glob
+import math
 import os
+import re
+from colorsys import rgb_to_hsv
 from datetime import date
 from PIL import Image
 
+
+def rewrite_project_paths(html):
+    """Rewrite relative src/href values to be relative to the projects/ folder."""
+    def rewrite(m):
+        attr, path = m.group(1), m.group(2)
+        if re.match(r'https?://|/|#|mailto:', path):
+            return m.group(0)
+        return f'{attr}="../../content/projects/{path}"'
+    return re.sub(r'(src|href)="([^"]*)"', rewrite, html)
+
+
+def page_head(title, css_path, bg, accent):
+    return f"""\
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<link rel="stylesheet" href="{css_path}">
+<style>:root{{--bg:{bg};--accent:{accent}}}</style>"""
+
+
+def page_footer(name, year):
+    return f'  <footer><p>{name} · {year}</p><a href="https://github.com/dholifield/portfolio-generator">generate</a></footer>'
+
+def color_sort_key(pixels):
+    """
+    Sort key for color ordering.
+    Chromatic images sort first (0, hue), achromatic sort after (1, brightness).
+    This keeps B&W/grayscale images grouped at the end rather than
+    collapsing them all to position 0 (the red end of the hue wheel).
+    """
+    sum_x = 0.0
+    sum_y = 0.0
+    total_weight = 0.0
+    total_v = 0.0
+
+    for r, g, b in pixels:
+        h, s, v = rgb_to_hsv(r / 255, g / 255, b / 255)
+        total_v += v
+
+        # Ignore near-black pixels
+        if v < 0.1 or s < 0.1:
+            continue
+
+        # Weight: emphasize bright + saturated colors
+        weight = s * (v ** 2)  # v^2 boosts bright pixels strongly
+
+        if weight > 0:
+            angle = 2 * math.pi * h
+            sum_x += math.cos(angle) * weight
+            sum_y += math.sin(angle) * weight
+            total_weight += weight
+
+    if total_weight > 0:
+        avg_angle = math.atan2(sum_y, sum_x)
+        avg_hue = (avg_angle / (2 * math.pi)) % 1.0
+        return (0, avg_hue)
+
+    # Achromatic case
+    return (1, total_v / len(pixels))
+
 # open profile.md with frontmatter
-profile = frontmatter.load("profile.md")
+if not os.path.exists("content/profile.md"):
+    raise FileNotFoundError("content/profile.md not found - cannot generate site")
+profile = frontmatter.load("content/profile.md")
 
 # look through all .md files in the projects folder
 projects = []
-for path in glob.glob("projects/*.md"):
+for path in glob.glob("content/projects/*.md"):
     project = frontmatter.load(path)
     if "title" not in project or "description" not in project:
         print(f"Warning: skipping {path} (missing title or description)")
@@ -19,6 +86,19 @@ for path in glob.glob("projects/*.md"):
 projects.sort(key=lambda x: x[1].get("order", 999))
 
 year = date.today().year
+
+# detect optional features
+_photo_exts = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"}
+has_photography = os.path.isdir("content/photography") and any(
+    os.path.splitext(f)[1].lower() in _photo_exts
+    for f in os.listdir("content/photography")
+)
+has_resume = bool(glob.glob("content/*.pdf"))
+
+if not has_photography:
+    print("Note: no photography folder or images found, skipping photography page")
+if not has_resume:
+    print("Note: no PDF found, skipping resume page")
 
 # clean and set up output directory
 for f in glob.glob("site/*.html"):
@@ -32,14 +112,11 @@ os.makedirs("site/projects", exist_ok=True)
 name = profile["name"]
 bio = profile["bio"].strip()
 portrait = profile["portrait"]
+bg = profile.get("background") or "#f7f7f2"
+accent = profile.get("accent") or "#899878"
 
 INDEX_TEMPLATE = """\
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{name}</title>
-<link rel="stylesheet" href="style.css">
+{head}
 
 <body>
   <header>
@@ -51,7 +128,7 @@ INDEX_TEMPLATE = """\
 
   <main>
     <div class="intro">
-      <img src="photos/{portrait}" alt="{name}" class="portrait">
+      <img src="content/{portrait}" alt="{name}" class="portrait">
       <p>{bio}</p>
     </div>
 
@@ -69,7 +146,7 @@ INDEX_TEMPLATE = """\
     </ul>
   </main>
 
-  <footer><p>{name} · {year}</p><a href="https://github.com/dholifield/portfolio-generator">generate</a></footer>
+{footer}
 </body>
 """
 
@@ -78,7 +155,6 @@ def build_project_item(slug, project):
     """Build a single <li> for the project list on the index page."""
     title = project["title"]
     desc = project["description"].strip()
-    link = f"site/projects/{slug}.html"
 
     thumbnail = project.get("thumbnail")
     thumbnail_alt = project.get("thumbnail_alt", title)
@@ -87,20 +163,28 @@ def build_project_item(slug, project):
     img = ""
     if thumbnail:
         cls = f' class="{thumbnail_class}"' if thumbnail_class else ""
-        img = f'\n        <img src="photos/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
+        img = f'\n        <img src="content/projects/photos/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
+
+    link = ""
+    if project.content.strip():
+        link = f'\n          <a href="site/projects/{slug}.html">read more ↝</a>'
 
     return f"""\
       <li>
         <div class="info">
           <h3>{title}</h3>
-          <p>{desc}</p>
-          <a href="{link}">read more ↝</a>
+          <p>{desc}</p>{link}
         </div>{img}
       </li>"""
 
 
+_nav = []
+if has_resume:
+    _nav.append(("site/resume.html", "Resume"))
+if has_photography:
+    _nav.append(("site/photography.html", "Photography"))
 nav_links = "\n".join(
-    f'      <a href="{n["url"]}">{n["label"]}</a>' for n in profile["nav"]
+    f'      <a href="{url}">{label}</a>' for url, label in _nav
 )
 skills_spans = "\n".join(
     f"      <span>{s}</span>" for s in profile["skills"]
@@ -114,6 +198,8 @@ project_items = "\n".join(
 )
 
 index_html = INDEX_TEMPLATE.format(
+    head=page_head(name, "style.css", bg, accent),
+    footer=page_footer(name, year),
     name=name,
     bio=bio,
     portrait=portrait,
@@ -124,19 +210,15 @@ index_html = INDEX_TEMPLATE.format(
     year=year,
 )
 
-with open("index.html", "w") as f:
+with open("index.html", "w", encoding="utf-8") as f:
     f.write(index_html)
 print("Generated index.html")
 
 # --- photography.html generation ---
 
-PHOTOGRAPHY_TEMPLATE = """\
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photography — {name}</title>
-<link rel="stylesheet" href="../style.css">
+if has_photography:
+    PHOTOGRAPHY_TEMPLATE = """\
+{head}
 <body>
   <header>
     <nav><a href="../index.html">↜ {name}</a></nav>
@@ -149,60 +231,61 @@ PHOTOGRAPHY_TEMPLATE = """\
     </div>
   </main>
 
-  <footer><p>{name} · {year}</p><a href="https://github.com/dholifield/portfolio-generator">generate</a></footer>
+{footer}
 </body>
 """
 
-exts = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"}
-photo_files = sorted(
-    f for f in os.listdir("photography")
-    if os.path.splitext(f)[1].lower() in exts
-)
+    photo_files = [
+        f for f in os.listdir("content/photography")
+        if os.path.splitext(f)[1].lower() in _photo_exts
+    ]
 
-# read aspect ratios so we can balance the two CSS columns
-ratios = {}
-for f in photo_files:
-    with Image.open(f"photography/{f}") as img:
-        w, h = img.size
-        ratios[f] = h / w  # height relative to width (all rendered same width)
+    # read aspect ratios and compute color sort keys in one pass
+    ratios = {}
+    sort_keys = {}
+    for f in photo_files:
+        with Image.open(f"content/photography/{f}") as img:
+            w, h = img.size
+            ratios[f] = h / w  # height relative to width (all rendered same width)
+            pixels = list(img.convert("RGB").resize((50, 50)).getdata())
+        sort_keys[f] = color_sort_key(pixels)
 
-# greedily assign images to two columns to balance total height
-col1, col2 = [], []
-h1, h2 = 0, 0
-for f in sorted(photo_files, key=lambda f: ratios[f], reverse=True):
-    if h1 <= h2:
-        col1.append(f)
-        h1 += ratios[f]
-    else:
-        col2.append(f)
-        h2 += ratios[f]
+    # sort by dominant hue, then greedily assign to two columns to balance height
+    photo_files.sort(key=lambda f: sort_keys[f])
+    col1, col2 = [], []
+    h1, h2 = 0, 0
+    for f in photo_files:
+        if h1 <= h2:
+            col1.append(f)
+            h1 += ratios[f]
+        else:
+            col2.append(f)
+            h2 += ratios[f]
 
-# CSS columns: 2 fills top-to-bottom in col1, then col2
-ordered = col1 + col2
-photo_imgs = "\n".join(
-    f'      <img src="../photography/{f}" alt="">' for f in ordered
-)
+    # CSS columns: 2 fills top-to-bottom in col1, then col2
+    ordered = col1 + col2
+    photo_imgs = "\n".join(
+        f'      <img src="../content/photography/{f}" alt="">' for f in ordered
+    )
 
-photography_html = PHOTOGRAPHY_TEMPLATE.format(
-    name=name, photo_imgs=photo_imgs, year=year
-)
-with open("site/photography.html", "w") as f:
-    f.write(photography_html)
-print("Generated site/photography.html")
+    photography_html = PHOTOGRAPHY_TEMPLATE.format(
+        head=page_head(f"Photography - {name}", "../style.css", bg, accent),
+        footer=page_footer(name, year),
+        name=name,
+        photo_imgs=photo_imgs,
+        year=year,
+    )
+    with open("site/photography.html", "w", encoding="utf-8") as f:
+        f.write(photography_html)
+    print("Generated site/photography.html")
 
 # --- resume.html generation ---
 
-resume_files = glob.glob("*.pdf")
-if resume_files:
-    resume_pdf = resume_files[0]
+if has_resume:
+    resume_pdf = glob.glob("content/*.pdf")[0]
 
     RESUME_TEMPLATE = """\
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Resume — {name}</title>
-<link rel="stylesheet" href="../style.css">
+{head}
 <body>
   <header>
     <nav>
@@ -216,25 +299,24 @@ if resume_files:
     <iframe class="resume" src="../{resume_pdf}"></iframe>
   </main>
 
-  <footer><p>{name} · {year}</p><a href="https://github.com/dholifield/portfolio-generator">generate</a></footer>
+{footer}
 </body>"""
 
     resume_html = RESUME_TEMPLATE.format(
-        name=name, resume_pdf=resume_pdf, year=year
+        head=page_head(f"Resume - {name}", "../style.css", bg, accent),
+        footer=page_footer(name, year),
+        name=name,
+        resume_pdf=resume_pdf,
+        year=year,
     )
-    with open("site/resume.html", "w") as f:
+    with open("site/resume.html", "w", encoding="utf-8") as f:
         f.write(resume_html)
     print("Generated site/resume.html")
 
 # --- project page generation ---
 
 PROJECT_TEMPLATE = """\
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{title} — {name}</title>
-<link rel="stylesheet" href="../../style.css">
+{head}
 
 <body>
   <header>
@@ -247,7 +329,7 @@ PROJECT_TEMPLATE = """\
     {body}
   </main>
 
-  <footer><p>{name} · {year}</p><a href="https://github.com/dholifield/portfolio-generator">generate</a></footer>
+{footer}
 </body>"""
 
 # generate html for each project with markdown content
@@ -255,7 +337,10 @@ for path, project in projects:
     if not project.content.strip():
         continue
     body = markdown.markdown(project.content, extensions=["fenced_code"])
+    body = rewrite_project_paths(body)
     html = PROJECT_TEMPLATE.format(
+        head=page_head(f"{project['title']} - {name}", "../../style.css", bg, accent),
+        footer=page_footer(name, year),
         name=name,
         title=project["title"],
         description=project["description"].strip(),
@@ -264,6 +349,6 @@ for path, project in projects:
     )
     slug = os.path.splitext(os.path.basename(path))[0]
     output_path = f"site/projects/{slug}.html"
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"Generated {output_path}")

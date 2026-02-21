@@ -4,3 +4,6 @@ CLAUDE.md
 # generated html
 index.html
 site/
+
+# tests
+test_*.py

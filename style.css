@@ -24,17 +24,17 @@ body {
   margin: 2em auto;
   max-width: 600px;
   padding: 0 1em;
-  background: #f7f7f2;
+  background: var(--bg);
   color: #222725;
 }
 
 a {
   color: white;
-  background-color: #899878;
+  background-color: var(--accent);
   text-decoration: none;
   border-radius: 5px;
   padding: 0.25em 0.5em;
-  outline: 0 solid #899878;
+  outline: 0 solid var(--accent);
   transition: outline-width 0.05s;
 }
 
@@ -111,7 +111,7 @@ p a {
 }
 
 .projects li:hover {
-  background: #eeeee8;
+  background: color-mix(in srgb, var(--bg), black 4%);
 }
 
 .projects .info {
@@ -152,6 +152,12 @@ p a {
 }
 
 /* project pages */
+main img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
 ul {
   padding-left: 1.2em;
 }
@@ -163,7 +169,7 @@ li {
 .img-placeholder {
   width: 100%;
   aspect-ratio: 16/9;
-  background: #e0e0da;
+  background: color-mix(in srgb, var(--bg), black 9%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,7 +179,7 @@ li {
 }
 
 pre {
-  background: #e8e8e2;
+  background: color-mix(in srgb, var(--bg), black 6%);
   padding: 0.75em 1em;
   overflow-x: auto;
   border-radius: 4px;
@@ -190,7 +196,7 @@ code {
 
 .press-item a {
   background: none;
-  color: #899878;
+  color: var(--accent);
   padding: 0;
   border-radius: 0;
 }
