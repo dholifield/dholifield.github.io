@@ -127,7 +127,7 @@ section_label = profile.get("section", "Projects")
 INDEX_TEMPLATE = """\
 {head}
 
-<body>
+<body style="max-width:600px">
   <header>
     <h1>{name}</h1>
     <nav>
@@ -238,7 +238,7 @@ if has_photography:
     print("Generating site/photography.html ... ", end="", flush=True)
     PHOTOGRAPHY_TEMPLATE = """\
 {head}
-<body>
+<body style="max-width:1500px;">
   <header>
     <nav><a href="../index.html">↜ {name}</a></nav>
     <h1>Photography</h1>
