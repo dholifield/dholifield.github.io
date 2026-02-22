@@ -248,6 +248,7 @@ if has_photography:
     <div class="grid">
 {photo_imgs}
     </div>
+    <p class="license">&copy; {name} &middot; Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">CC BY-NC-ND 4.0</a></p>
   </main>
 
 {footer}
