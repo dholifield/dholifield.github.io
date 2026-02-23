@@ -111,6 +111,33 @@ content/projects/
 
 Reference them from project markdown with simple relative paths like `photos/image.jpg`.
 
+## `.genignore`
+
+Create a `.genignore` file in the project root to exclude files from generation. It works like `.gitignore` — one glob pattern per line, with `#` comments and blank lines ignored.
+
+```
+# Drafts and templates
+*draft*
+*template*
+*WIP*
+```
+
+Matching files in `content/projects/` and `content/photography/` are skipped during generation with an `Ignored: ...` note printed to the console. If the file doesn't exist, everything is processed as normal.
+
+## Using an Obsidian vault
+
+You can point `content/projects/` at (or sync it with) an [Obsidian](https://obsidian.md/) vault folder to write project pages in Obsidian's editor. A few tips:
+
+- **Templates** — Obsidian's core Templates or Templater plugin can scaffold new project files with the required frontmatter (`title`, `description`, `order`, etc.). Add your template files to `.genignore` so they aren't compiled into the site:
+  ```
+  *template*
+  ```
+- **Drafts** — Use a naming convention like `draft-project-name.md` and ignore them with `*draft*` until they're ready.
+- **Wiki-links** — The generator processes standard Markdown links, not `[[wiki-links]]`. Use Obsidian's "Use [[Wikilinks]]" setting (turned off) or its Markdown link paste option to keep links compatible.
+- **Images** — Configure Obsidian's attachment folder to a subfolder inside `content/projects/` (e.g. `photos/`) so image paths stay relative and work with the generator's path rewriting.
+
+This workflow lets you use Obsidian's live preview, backlinks, and graph view for drafting while the generator handles the final HTML output.
+
 ## Styling
 
 Edit `style.css` to change the look. The site uses IBM Plex Mono loaded from `fonts/`. The layout is a centered single column (600px max width) with responsive breakpoints for mobile.
@@ -137,6 +164,7 @@ content/                  # your content (edit this)
     photos/
   photography/
 
+.genignore                # optional ignore patterns
 fonts/                    # web fonts
 style.css                 # site styles
 generate_site.py          # build script

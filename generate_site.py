@@ -1,3 +1,4 @@
+import fnmatch
 import frontmatter
 import markdown
 import glob
@@ -8,6 +9,21 @@ import re
 from colorsys import rgb_to_hsv
 from datetime import date
 from PIL import Image
+
+
+def load_genignore():
+    """Load .genignore patterns and return an is_ignored(path) predicate."""
+    if not os.path.exists(".genignore"):
+        return lambda path: False
+    with open(".genignore", encoding="utf-8") as f:
+        patterns = [
+            line.strip() for line in f
+            if line.strip() and not line.strip().startswith("#")
+        ]
+    def is_ignored(path):
+        name = os.path.basename(path)
+        return any(fnmatch.fnmatch(name, p) for p in patterns)
+    return is_ignored
 
 
 def rewrite_project_paths(html):
@@ -71,6 +87,9 @@ def color_sort_key(pixels):
     # Achromatic case
     return (1, total_v / len(pixels))
 
+# load .genignore patterns
+is_ignored = load_genignore()
+
 # open profile.md with frontmatter
 if not os.path.exists("content/profile.md"):
     raise FileNotFoundError("content/profile.md not found - cannot generate site")
@@ -79,6 +98,9 @@ profile = frontmatter.load("content/profile.md")
 # look through all .md files in the projects folder
 projects = []
 for path in glob.glob("content/projects/*.md"):
+    if is_ignored(path):
+        print(f"Ignored: {path}")
+        continue
     project = frontmatter.load(path)
     if "title" not in project or "description" not in project:
         print(f"Warning: skipping {path} (missing title or description)")
@@ -92,6 +114,7 @@ year = date.today().year
 _photo_exts = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"}
 has_photography = os.path.isdir("content/photography") and any(
     os.path.splitext(f)[1].lower() in _photo_exts
+    and not is_ignored(f)
     for f in os.listdir("content/photography")
 )
 has_resume = bool(glob.glob("content/*.pdf"))
@@ -255,10 +278,14 @@ if has_photography:
 </body>
 """
 
-    photo_files = [
-        f for f in os.listdir("content/photography")
-        if os.path.splitext(f)[1].lower() in _photo_exts
-    ]
+    photo_files = []
+    for f in os.listdir("content/photography"):
+        if os.path.splitext(f)[1].lower() not in _photo_exts:
+            continue
+        if is_ignored(f):
+            print(f"Ignored: content/photography/{f}")
+            continue
+        photo_files.append(f)
 
     # read aspect ratios and compute color sort keys in one pass
     ratios = {}
