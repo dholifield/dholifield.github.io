@@ -2,12 +2,12 @@
 title: Mechanical Keyboard
 description: "Designed a custom split keyboard end-to-end: PCB layout, firmware, and enclosure, optimized for ergonomics and minimal component count with a reversible PCB."
 order: 2
-thumbnail: photos/kb-326.jpg
+thumbnail: projects/photos/kb-326.jpg
 thumbnail_alt: Mechanical Keyboard
 ---
-A custom split mechanical keyboard designed from scratch, from identifying the problem through PCB design, firmware, and planning for manufacturing. The goal was a compact, ergonomic keyboard with minimal component count and no compromises on feel.
+A custom split mechanical keyboard, [split42](https://github.com/dholifield/split42), designed from scratch, from identifying the problem through PCB design, firmware, and planning for manufacturing. The goal was a compact, ergonomic keyboard with minimal component count and no compromises on feel.
 
-![kb](photos/kb.jpg)
+![kb](photography/kb.jpg)
 
 ## PCB Design
 

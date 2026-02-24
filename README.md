@@ -73,12 +73,12 @@ Other optional fields:
 | Field | Description |
 |-------|-------------|
 | `order` | Sort position within the section (lower = first) |
-| `thumbnail` | Image path relative to the section folder |
+| `thumbnail` | Image path relative to `content/` |
 | `thumbnail_alt` | Alt text for thumbnail |
 | `thumbnail_class` | CSS class on thumbnail (e.g. `contain`) |
 | `redirect` | Link to external URL instead of generating a detail page |
 
-Images and links in your markdown use paths relative to the section folder — the generator rewrites them automatically.
+Images and links in your markdown use paths relative to `content/` — the generator rewrites them automatically.
 
 ### Gallery
 
@@ -133,5 +133,4 @@ Use Obsidian's Templates to scaffold new section pages with the required `title`
 
 A few tips:
 - Turn off **Settings > Files & Links > Use [[Wikilinks]]** so links stay as standard markdown
-- Set your attachment folder to a subfolder inside the section (e.g. `projects/photos/`) so image paths work with the generator's path rewriting
 - Use a `*draft*` naming convention and add it to `.genignore` to keep work-in-progress pages out of the build

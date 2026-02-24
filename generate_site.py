@@ -26,13 +26,13 @@ def load_genignore():
     return is_ignored
 
 
-def rewrite_project_paths(html, folder):
+def rewrite_project_paths(html):
     """Rewrite relative src/href values to be relative to the content folder."""
     def rewrite(m):
         attr, path = m.group(1), m.group(2)
         if re.match(r'https?://|/|#|mailto:', path):
             return m.group(0)
-        return f'{attr}="../../content/{folder}/{path}"'
+        return f'{attr}="../../content/{path}"'
     return re.sub(r'(src|href)="([^"]*)"', rewrite, html)
 
 
@@ -206,7 +206,7 @@ def build_project_item(slug, project, folder):
     img = ""
     if thumbnail:
         cls = f' class="{thumbnail_class}"' if thumbnail_class else ""
-        img = f'\n        <img src="content/{folder}/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
+        img = f'\n        <img src="content/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
 
     link = ""
     redirect = project.get("redirect")
@@ -421,7 +421,7 @@ for folder_name, items in sections.items():
         output_path = f"site/{folder_name}/{slug}.html"
         print(f"Generating {output_path} ... ", end="", flush=True)
         body = markdown.markdown(project.content, extensions=["fenced_code"])
-        body = rewrite_project_paths(body, folder_name)
+        body = rewrite_project_paths(body)
         html = PROJECT_TEMPLATE.format(
             head=page_head(f"{project['title']} - {name}", "../../style.css", bg, accent),
             footer=page_footer(name, year),
