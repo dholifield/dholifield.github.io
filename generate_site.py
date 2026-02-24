@@ -26,13 +26,13 @@ def load_genignore():
     return is_ignored
 
 
-def rewrite_project_paths(html):
-    """Rewrite relative src/href values to be relative to the projects/ folder."""
+def rewrite_project_paths(html, folder):
+    """Rewrite relative src/href values to be relative to the content folder."""
     def rewrite(m):
         attr, path = m.group(1), m.group(2)
         if re.match(r'https?://|/|#|mailto:', path):
             return m.group(0)
-        return f'{attr}="../../content/projects/{path}"'
+        return f'{attr}="../../content/{folder}/{path}"'
     return re.sub(r'(src|href)="([^"]*)"', rewrite, html)
 
 
@@ -95,27 +95,45 @@ if not os.path.exists("content/profile.md"):
     raise FileNotFoundError("content/profile.md not found - cannot generate site")
 profile = frontmatter.load("content/profile.md")
 
-# look through all .md files in the projects folder
-projects = []
-for path in glob.glob("content/projects/*.md"):
-    if is_ignored(path):
-        print(f"Ignored: {path}")
-        continue
-    project = frontmatter.load(path)
-    if "title" not in project or "description" not in project:
-        print(f"Warning: skipping {path} (missing title or description)")
-        continue
-    projects.append((path, project))
-projects.sort(key=lambda x: x[1].get("order", 999))
-
 year = date.today().year
+gallery_folder = profile.get("gallery")
+
+# discover content subdirectories dynamically
+all_sections = {}  # folder_name -> sorted list of (path, project)
+for entry in os.listdir("content"):
+    folder_path = os.path.join("content", entry)
+    if not os.path.isdir(folder_path):
+        continue
+    if entry.startswith("."):
+        continue
+    if entry == gallery_folder:
+        continue
+    items = []
+    for path in glob.glob(os.path.join(folder_path, "*.md")):
+        if is_ignored(path):
+            print(f"Ignored: {path}")
+            continue
+        project = frontmatter.load(path)
+        if "title" not in project or "description" not in project:
+            print(f"Warning: skipping {path} (missing title or description)")
+            continue
+        items.append((path, project))
+    if items:
+        items.sort(key=lambda x: x[1].get("order") or 999)
+        all_sections[entry] = items
+
+# order sections: explicit list from profile first, then remaining alphabetically
+section_order = profile.get("sections") or []
+ordered_keys = [s for s in section_order if s in all_sections]
+ordered_keys += sorted(k for k in all_sections if k not in ordered_keys)
+sections = {k: all_sections[k] for k in ordered_keys}
 
 # detect optional features
 _photo_exts = {".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"}
-has_photography = os.path.isdir("content/photography") and any(
+has_photography = gallery_folder and os.path.isdir(f"content/{gallery_folder}") and any(
     os.path.splitext(f)[1].lower() in _photo_exts
     and not is_ignored(f)
-    for f in os.listdir("content/photography")
+    for f in os.listdir(f"content/{gallery_folder}")
 )
 has_resume = bool(glob.glob("content/*.pdf"))
 
@@ -125,11 +143,13 @@ if not has_resume:
     print("Note: no PDF found, skipping resume page")
 
 # clean and set up output directory
+os.makedirs("site", exist_ok=True)
 for f in glob.glob("site/*.html"):
     os.remove(f)
-for f in glob.glob("site/projects/*.html"):
-    os.remove(f)
-os.makedirs("site/projects", exist_ok=True)
+for folder_name in sections:
+    for f in glob.glob(f"site/{folder_name}/*.html"):
+        os.remove(f)
+    os.makedirs(f"site/{folder_name}", exist_ok=True)
 
 # --- index.html generation ---
 
@@ -145,8 +165,6 @@ bg = profile.get("background") or "f7f7f2"
 accent = profile.get("accent") or "899878"
 bg = bg if bg.startswith("#") else f"#{bg}"
 accent = accent if accent.startswith("#") else f"#{accent}"
-section_label = profile.get("section", "Projects")
-
 INDEX_TEMPLATE = """\
 {head}
 
@@ -168,10 +186,7 @@ INDEX_TEMPLATE = """\
 {links_section}
     <hr>
 
-    <h2>{section_label}</h2>
-    <ul class="projects">
-{project_items}
-    </ul>
+{sections}
   </main>
 
 {footer}
@@ -179,7 +194,7 @@ INDEX_TEMPLATE = """\
 """
 
 
-def build_project_item(slug, project):
+def build_project_item(slug, project, folder):
     """Build a single <li> for the project list on the index page."""
     title = project["title"]
     desc = project["description"].strip()
@@ -191,7 +206,7 @@ def build_project_item(slug, project):
     img = ""
     if thumbnail:
         cls = f' class="{thumbnail_class}"' if thumbnail_class else ""
-        img = f'\n        <img src="content/projects/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
+        img = f'\n        <img src="content/{folder}/{thumbnail}" alt="{thumbnail_alt}"{cls}>'
 
     link = ""
     redirect = project.get("redirect")
@@ -200,7 +215,7 @@ def build_project_item(slug, project):
             print(f"Warning: {slug}.md has a redirect and body content; body will be ignored")
         link = f'\n          <a href="{redirect}">read more ↝</a>'
     elif project.content.strip():
-        link = f'\n          <a href="site/projects/{slug}.html">read more ↝</a>'
+        link = f'\n          <a href="site/{folder}/{slug}.html">read more ↝</a>'
 
     return f"""\
       <li>
@@ -215,7 +230,8 @@ _nav = []
 if has_resume:
     _nav.append(("site/resume.html", "Resume"))
 if has_photography:
-    _nav.append(("site/photography.html", "Photography"))
+    gallery_title = gallery_folder.replace("-", " ").replace("_", " ").title()
+    _nav.append((f"site/{gallery_folder}.html", gallery_title))
 nav_links = "\n".join(
     f'      <a href="{url}">{label}</a>' for url, label in _nav
 )
@@ -232,10 +248,20 @@ links_section = ""
 if links:
     anchors = "\n".join(f'      <a href="{l["url"]}">{l["label"]}</a>' for l in links)
     links_section = f'    <p class="links">\n{anchors}\n    </p>'
-project_items = "\n".join(
-    build_project_item(os.path.splitext(os.path.basename(p))[0], proj)
-    for p, proj in projects
-)
+sections_html_parts = []
+for folder_name, items in sections.items():
+    section_title = folder_name.replace("-", " ").replace("_", " ").title()
+    project_items = "\n".join(
+        build_project_item(os.path.splitext(os.path.basename(p))[0], proj, folder_name)
+        for p, proj in items
+    )
+    sections_html_parts.append(
+        f"    <h2>{section_title}</h2>\n"
+        f"    <ul class=\"projects\">\n"
+        f"{project_items}\n"
+        f"    </ul>"
+    )
+sections_html = "\n<hr>\n".join(sections_html_parts)
 
 index_html = INDEX_TEMPLATE.format(
     head=page_head(name, "style.css", bg, accent),
@@ -246,8 +272,7 @@ index_html = INDEX_TEMPLATE.format(
     nav_links=nav_links,
     skills_section=skills_section,
     links_section=links_section,
-    project_items=project_items,
-    section_label=section_label,
+    sections=sections_html,
     year=year,
 )
 
@@ -258,13 +283,15 @@ print("done")
 # --- photography.html generation ---
 
 if has_photography:
-    print("Generating site/photography.html ... ", end="", flush=True)
+    gallery_title = gallery_folder.replace("-", " ").replace("_", " ").title()
+    gallery_output = f"site/{gallery_folder}.html"
+    print(f"Generating {gallery_output} ... ", end="", flush=True)
     PHOTOGRAPHY_TEMPLATE = """\
 {head}
 <body style="max-width:1500px;">
   <header>
     <nav><a href="../index.html">↜ {name}</a></nav>
-    <h1>Photography</h1>
+    <h1>{gallery_title}</h1>
   </header>
 
   <main>
@@ -278,12 +305,13 @@ if has_photography:
 </body>
 """
 
+    gallery_path = f"content/{gallery_folder}"
     photo_files = []
-    for f in os.listdir("content/photography"):
+    for f in os.listdir(gallery_path):
         if os.path.splitext(f)[1].lower() not in _photo_exts:
             continue
         if is_ignored(f):
-            print(f"Ignored: content/photography/{f}")
+            print(f"Ignored: {gallery_path}/{f}")
             continue
         photo_files.append(f)
 
@@ -291,7 +319,7 @@ if has_photography:
     ratios = {}
     sort_keys = {}
     for f in photo_files:
-        with Image.open(f"content/photography/{f}") as img:
+        with Image.open(f"{gallery_path}/{f}") as img:
             w, h = img.size
             ratios[f] = h / w  # height relative to width (all rendered same width)
             pixels = list(img.convert("RGB").resize((50, 50)).get_flattened_data())
@@ -312,17 +340,18 @@ if has_photography:
     # CSS columns: 2 fills top-to-bottom in col1, then col2
     ordered = col1 + col2
     photo_imgs = "\n".join(
-        f'      <img src="../content/photography/{f}" alt="">' for f in ordered
+        f'      <img src="../content/{gallery_folder}/{f}" alt="">' for f in ordered
     )
 
     photography_html = PHOTOGRAPHY_TEMPLATE.format(
-        head=page_head(f"Photography - {name}", "../style.css", bg, accent),
+        head=page_head(f"{gallery_title} - {name}", "../style.css", bg, accent),
         footer=page_footer(name, year),
         name=name,
+        gallery_title=gallery_title,
         photo_imgs=photo_imgs,
         year=year,
     )
-    with open("site/photography.html", "w", encoding="utf-8") as f:
+    with open(gallery_output, "w", encoding="utf-8") as f:
         f.write(photography_html)
     print("done")
 
@@ -371,6 +400,7 @@ PROJECT_TEMPLATE = """\
     <nav><a href="../../index.html">↜ {name}</a></nav>
     <h1>{title}</h1>
     <p>{description}</p>
+    <hr>
   </header>
 
   <main>
@@ -381,25 +411,26 @@ PROJECT_TEMPLATE = """\
 </body>"""
 
 # generate html for each project with markdown content
-for path, project in projects:
-    if not project.content.strip():
-        continue
-    if project.get("redirect"):
-        continue
-    slug = os.path.splitext(os.path.basename(path))[0]
-    output_path = f"site/projects/{slug}.html"
-    print(f"Generating {output_path} ... ", end="", flush=True)
-    body = markdown.markdown(project.content, extensions=["fenced_code"])
-    body = rewrite_project_paths(body)
-    html = PROJECT_TEMPLATE.format(
-        head=page_head(f"{project['title']} - {name}", "../../style.css", bg, accent),
-        footer=page_footer(name, year),
-        name=name,
-        title=project["title"],
-        description=project["description"].strip(),
-        body=body,
-        year=year,
-    )
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(html)
-    print("done")
+for folder_name, items in sections.items():
+    for path, project in items:
+        if not project.content.strip():
+            continue
+        if project.get("redirect"):
+            continue
+        slug = os.path.splitext(os.path.basename(path))[0]
+        output_path = f"site/{folder_name}/{slug}.html"
+        print(f"Generating {output_path} ... ", end="", flush=True)
+        body = markdown.markdown(project.content, extensions=["fenced_code"])
+        body = rewrite_project_paths(body, folder_name)
+        html = PROJECT_TEMPLATE.format(
+            head=page_head(f"{project['title']} - {name}", "../../style.css", bg, accent),
+            footer=page_footer(name, year),
+            name=name,
+            title=project["title"],
+            description=project["description"].strip(),
+            body=body,
+            year=year,
+        )
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(html)
+        print("done")
