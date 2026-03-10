@@ -2,12 +2,11 @@
 title: VEX Robotics
 description: Eight years of competitive robotics culminating in the 2024 VEXU World Championship. Robot design, manufacturing, control algorithms, and open-source libraries.
 order: 1
+thumbnail: projects/photos/cu.jpg
 ---
 I competed in VEX Robotics for eight years across high school and college, representing teams 7701T, BLRS2, and BLRS (Purdue's competitive robotics teams). The work covered the full stack of robot development: mechanical design and CAD, manufacturing, and software.
 
-<!-- add an image of a robot here -->
-<div class="img-placeholder">[ photo ]</div>
-
+![over under](projects/photos/ou.jpg)
 ## Achievements
 
 - 2024 VEXU World Champion
@@ -63,5 +62,4 @@ Robots were built using 3D printing, CNC machining, and off-the-shelf parts. Sen
   </div>
 </div>
 
-<!-- add more photos here -->
-<div class="img-placeholder">[ photo ]</div>
+![spin up](projects/photos/su.png)

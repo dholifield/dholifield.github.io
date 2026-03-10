@@ -13,9 +13,9 @@ A custom split mechanical keyboard, [split42](https://github.com/dholifield/spli
 
 Designed the schematic and board layout in KiCad. The key constraint was a reversible PCB: a single board that works for both the left and right halves of the split, cutting fabrication cost and complexity in half.
 
-<!-- add PCB layout or schematic screenshot here -->
-<div class="img-placeholder">[ PCB layout ]</div>
+![kb schemaic](projects/photos/pcb_schem.png)
 
+![pcb](projects/photos/pcb_kicad.png)
 ## Process
 
 The project followed a full product development cycle: identifying pain points with existing keyboards, iterative prototyping and testing, gathering feedback, and designing with manufacturing scalability in mind.
