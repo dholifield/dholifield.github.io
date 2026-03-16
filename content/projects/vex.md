@@ -9,9 +9,9 @@ I competed in VEX Robotics for eight years across high school and college, repre
 ![over under](projects/photos/ou.jpg)
 ## Achievements
 
-- 2024 VEXU World Champion
-- 2022 VEXU Skills World Champion
-- 2020 Kalahari Classic Champion
+- 2024 VEXU World Champion [showcase](https://www.youtube.com/watch?v=jAn85K9BAmQ=) [explanation](https://youtu.be/TqMNuXfKgMc?si=zzowpl-FdwDTvD7z)
+- 2022 VEXU Skills World Champion [showcase](https://youtu.be/kSVlATxMqhQ?si=q5tOOw1Na_bcgYks) [explanation](https://youtu.be/xmrJk5sAhok?si=Fm-dU9HOnuEFaqGe)
+- 2020 Kalahari Classic Champion [showcase](https://youtu.be/RPXdqgSQvwg?si=daGupOt1z5CtE_Cb)
 - 6× world championship qualifiers, 3× world division finalists
 - 12× tournament champions, 7× skills champions
 
