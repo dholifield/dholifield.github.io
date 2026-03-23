@@ -1,10 +1,10 @@
 ---
 title: VEX Robotics
-description: Eight years of competitive robotics culminating in the 2024 VEXU World Championship. Robot design, manufacturing, control algorithms, and open-source libraries.
+description: Eight years of competitive robotics culminating in winning the 2024 VEXU World Championship. Robot design, manufacturing, control algorithms, and open-source libraries.
 order: 1
 thumbnail: projects/photos/cu.jpg
 ---
-I competed in VEX Robotics for eight years across high school and college, representing teams 7701T, BLRS2, and BLRS (Purdue's competitive robotics teams). The work covered the full stack of robot development: mechanical design and CAD, manufacturing, and software.
+I competed in VEX Robotics for eight years across high school and college, representing teams 7701T, BLRS2, and BLRS. The work covered the full stack of robot development: mechanical design and CAD, manufacturing, and software.
 
 ![over under](projects/photos/ou.jpg)
 ## Achievements
@@ -15,9 +15,13 @@ I competed in VEX Robotics for eight years across high school and college, repre
 - 6× world championship qualifiers, 3× world division finalists
 - 12× tournament champions, 7× skills champions
 
+## Mechanics
+
+Each season started with brainstorming ideas to solve the new challenges. Ideas were modeled in Autodesk Inventor for part design and assemblies, using FEA for structural validation prior to manufacturing. Mechanisms were selected and developed through rapid prototyping and testing, and brought to life with 3D-printing, CNC machining, and off-the-shelf parts. Key target metrics were set from game analysis, with the system often benchmarked to keep us where we needed to be.
+
 ## Software
 
-I wrote control algorithms to minimize navigation time and error, including PID controllers and a custom Pure Pursuit variant using linear circle approximation. The system achieved <2" odometry accuracy over 12 feet despite IMU drift limitations.
+I wrote control algorithms to minimize navigation time and error, including PID controllers and a custom Pure Pursuit variant using linear circle approximation. The system integrated a variety of sensors including capacitive encoders and IMUs to achieve <2" odometry accuracy over 12 feet despite IMU drift limitations.
 
 I also developed and maintain two open-source robot chassis control libraries, [ARMS](https://github.com/purduesigbots/ARMS) and [appa](https://appa.odom.tech/), used by teams beyond our own.
 
